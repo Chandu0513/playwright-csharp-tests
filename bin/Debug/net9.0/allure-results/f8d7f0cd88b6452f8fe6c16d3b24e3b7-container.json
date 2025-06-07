@@ -1,0 +1,44 @@
+{
+  "uuid": "3c20aa6b-bfbf-4db5-8585-5e8cbdf6e43b-tc-0-1000",
+  "name": "PlaywrightNUnitFramework.Tests.LoginTest.VerifyLoginPageTitleAfterLogin(\"chromium\")",
+  "children": [
+    "273f7030-2c27-4895-a73c-d2189a05fb98-tr-0-1001"
+  ],
+  "befores": [
+    {
+      "name": "Setup",
+      "status": "passed",
+      "statusDetails": {
+        "known": false,
+        "muted": false,
+        "flaky": false
+      },
+      "stage": "finished",
+      "steps": [],
+      "attachments": [],
+      "parameters": [],
+      "start": 1748516797177,
+      "stop": 1748516797177
+    }
+  ],
+  "afters": [
+    {
+      "name": "Teardown",
+      "status": "passed",
+      "statusDetails": {
+        "known": false,
+        "muted": false,
+        "flaky": false
+      },
+      "stage": "finished",
+      "steps": [],
+      "attachments": [],
+      "parameters": [],
+      "start": 1748516797177,
+      "stop": 1748516797177
+    }
+  ],
+  "links": [],
+  "start": 1748516788902,
+  "stop": 1748516797205
+}

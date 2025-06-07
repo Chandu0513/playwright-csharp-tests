@@ -1,0 +1,12 @@
+{
+  "uuid": "3ee54598-6195-473b-af8d-669e32f3b4ad-tc-0-1000",
+  "name": "PlaywrightNUnitFramework.Tests.LoginTest.VerifyLoginPageTitleAfterLogin(\"chromium\")",
+  "children": [
+    "24cef4a6-93ee-4574-b77d-f0de3b35e13e-tr-0-1001"
+  ],
+  "befores": [],
+  "afters": [],
+  "links": [],
+  "start": 1748516240975,
+  "stop": 1748516246581
+}

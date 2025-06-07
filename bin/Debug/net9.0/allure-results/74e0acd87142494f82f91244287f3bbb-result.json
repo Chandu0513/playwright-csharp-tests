@@ -1,0 +1,90 @@
+{
+  "uuid": "84f566ca-69f5-40d8-b48a-1bd345a0eb3d-tr-0-1001",
+  "historyId": "PlaywrightNUnitFramework.Tests.LoginTest.VerifyLoginPageTitleAfterLogin(\"chromium\")",
+  "fullName": "PlaywrightNUnitFramework.Tests.LoginTest.VerifyLoginPageTitleAfterLogin(\"chromium\")",
+  "labels": [
+    {
+      "name": "thread",
+      "value": "ParallelWorker#8"
+    },
+    {
+      "name": "host",
+      "value": "DESKTOP-2Q0TBUG"
+    },
+    {
+      "name": "package",
+      "value": "PlaywrightNUnitFramework.Tests"
+    },
+    {
+      "name": "testMethod",
+      "value": "VerifyLoginPageTitleAfterLogin"
+    },
+    {
+      "name": "testClass",
+      "value": "LoginTest"
+    },
+    {
+      "name": "tag",
+      "value": "CrossBrowser"
+    },
+    {
+      "name": "severity",
+      "value": "normal"
+    },
+    {
+      "name": "owner",
+      "value": "QA Team"
+    },
+    {
+      "name": "subSuite",
+      "value": "Login Page"
+    },
+    {
+      "name": "suite",
+      "value": "Login Suite"
+    }
+  ],
+  "links": [],
+  "name": "VerifyLoginPageTitleAfterLogin(\"chromium\")",
+  "status": "passed",
+  "statusDetails": {
+    "known": false,
+    "muted": false,
+    "flaky": false,
+    "message": "VerifyLoginPageTitleAfterLogin(\"chromium\")"
+  },
+  "stage": "finished",
+  "steps": [
+    {
+      "name": "VerifyLoginPageTitleAfterLogin(\"chromium\")",
+      "status": "passed",
+      "statusDetails": {
+        "known": false,
+        "muted": false,
+        "flaky": false,
+        "message": ""
+      },
+      "stage": "finished",
+      "steps": [],
+      "attachments": [
+        {
+          "name": "Console Output",
+          "source": "a91379bfeed84a59b243f32d30722913-attachment.txt",
+          "type": "text/plain"
+        }
+      ],
+      "parameters": [],
+      "start": 1748517335400,
+      "stop": 1748517341273
+    }
+  ],
+  "attachments": [],
+  "parameters": [
+    {
+      "name": "Param #0",
+      "value": "chromium"
+    }
+  ],
+  "start": 1748517335400,
+  "stop": 1748517341277
+}

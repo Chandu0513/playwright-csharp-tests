@@ -1,0 +1,78 @@
+{
+  "uuid": "1e392ae8-79b0-44e3-978c-dde1162824ff-tr-0-1001",
+  "historyId": "PlaywrightNUnitFramework.Tests.LoginTest.VerifyLoginPageTitleAfterLogin(\"chromium\")",
+  "fullName": "PlaywrightNUnitFramework.Tests.LoginTest.VerifyLoginPageTitleAfterLogin(\"chromium\")",
+  "labels": [
+    {
+      "name": "thread",
+      "value": "ParallelWorker#5"
+    },
+    {
+      "name": "host",
+      "value": "DESKTOP-2Q0TBUG"
+    },
+    {
+      "name": "package",
+      "value": "PlaywrightNUnitFramework.Tests"
+    },
+    {
+      "name": "testMethod",
+      "value": "VerifyLoginPageTitleAfterLogin"
+    },
+    {
+      "name": "testClass",
+      "value": "LoginTest"
+    },
+    {
+      "name": "tag",
+      "value": "CrossBrowser"
+    },
+    {
+      "name": "suite",
+      "value": "Login Suite"
+    }
+  ],
+  "links": [],
+  "name": "VerifyLoginPageTitleAfterLogin(\"chromium\")",
+  "status": "passed",
+  "statusDetails": {
+    "known": false,
+    "muted": false,
+    "flaky": false,
+    "message": "VerifyLoginPageTitleAfterLogin(\"chromium\")"
+  },
+  "stage": "finished",
+  "steps": [
+    {
+      "name": "VerifyLoginPageTitleAfterLogin(\"chromium\")",
+      "status": "passed",
+      "statusDetails": {
+        "known": false,
+        "muted": false,
+        "flaky": false,
+        "message": ""
+      },
+      "stage": "finished",
+      "steps": [],
+      "attachments": [
+        {
+          "name": "Console Output",
+          "source": "a87223fc25b4402b88b140ac9334eec9-attachment.txt",
+          "type": "text/plain"
+        }
+      ],
+      "parameters": [],
+      "start": 1748522185494,
+      "stop": 1748522191324
+    }
+  ],
+  "attachments": [],
+  "parameters": [
+    {
+      "name": "Param #0",
+      "value": "chromium"
+    }
+  ],
+  "start": 1748522185494,
+  "stop": 1748522191327
+}

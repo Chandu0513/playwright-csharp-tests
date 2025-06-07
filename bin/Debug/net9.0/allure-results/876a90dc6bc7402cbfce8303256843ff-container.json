@@ -1,0 +1,28 @@
+{
+  "uuid": "c43bf6d4-ea2b-41a4-a0eb-02861402e820-tc-0-1000",
+  "name": "PlaywrightNUnitFramework.Tests.LoginTest.VerifyLoginPageTitleAfterLogin(\"chromium\")",
+  "children": [
+    "6f9a2109-ce76-440b-9394-774f62158099-tr-0-1001"
+  ],
+  "befores": [],
+  "afters": [
+    {
+      "name": "TearDown",
+      "status": "passed",
+      "statusDetails": {
+        "known": false,
+        "muted": false,
+        "flaky": false
+      },
+      "stage": "finished",
+      "steps": [],
+      "attachments": [],
+      "parameters": [],
+      "start": 1748522301226,
+      "stop": 1748522301226
+    }
+  ],
+  "links": [],
+  "start": 1748522294706,
+  "stop": 1748522301275
+}

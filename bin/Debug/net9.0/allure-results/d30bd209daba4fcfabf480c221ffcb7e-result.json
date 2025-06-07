@@ -1,0 +1,90 @@
+{
+  "uuid": "2ea07a41-89b6-4505-b4d6-5488153a9171-tr-0-1002",
+  "historyId": "PlaywrightNUnitFramework.Tests.LoginTest.VerifyLoginPageTitleAfterLogin(\"firefox\")",
+  "fullName": "PlaywrightNUnitFramework.Tests.LoginTest.VerifyLoginPageTitleAfterLogin(\"firefox\")",
+  "labels": [
+    {
+      "name": "thread",
+      "value": "ParallelWorker#7"
+    },
+    {
+      "name": "host",
+      "value": "DESKTOP-2Q0TBUG"
+    },
+    {
+      "name": "package",
+      "value": "PlaywrightNUnitFramework.Tests"
+    },
+    {
+      "name": "testMethod",
+      "value": "VerifyLoginPageTitleAfterLogin"
+    },
+    {
+      "name": "testClass",
+      "value": "LoginTest"
+    },
+    {
+      "name": "tag",
+      "value": "CrossBrowser"
+    },
+    {
+      "name": "severity",
+      "value": "normal"
+    },
+    {
+      "name": "owner",
+      "value": "QA Team"
+    },
+    {
+      "name": "subSuite",
+      "value": "Login Page"
+    },
+    {
+      "name": "suite",
+      "value": "Login Suite"
+    }
+  ],
+  "links": [],
+  "name": "VerifyLoginPageTitleAfterLogin(\"firefox\")",
+  "status": "passed",
+  "statusDetails": {
+    "known": false,
+    "muted": false,
+    "flaky": false,
+    "message": "VerifyLoginPageTitleAfterLogin(\"firefox\")"
+  },
+  "stage": "finished",
+  "steps": [
+    {
+      "name": "VerifyLoginPageTitleAfterLogin(\"firefox\")",
+      "status": "passed",
+      "statusDetails": {
+        "known": false,
+        "muted": false,
+        "flaky": false,
+        "message": ""
+      },
+      "stage": "finished",
+      "steps": [],
+      "attachments": [
+        {
+          "name": "Console Output",
+          "source": "916a7ed1a64347feb371a23246c6ff25-attachment.txt",
+          "type": "text/plain"
+        }
+      ],
+      "parameters": [],
+      "start": 1748515908041,
+      "stop": 1748515917203
+    }
+  ],
+  "attachments": [],
+  "parameters": [
+    {
+      "name": "Param #0",
+      "value": "firefox"
+    }
+  ],
+  "start": 1748515908041,
+  "stop": 1748515917203
+}

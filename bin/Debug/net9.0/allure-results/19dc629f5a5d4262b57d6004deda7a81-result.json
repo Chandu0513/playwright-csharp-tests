@@ -1,0 +1,67 @@
+{
+  "uuid": "7f79e9f1-f5c7-4d6e-aab1-a9c778611738",
+  "historyId": "23904161fbddbabd4dc25805c32e6a4d",
+  "testCaseId": "5e8634a4ea4dc9ae4f498a2c8aba546f",
+  "fullName": "PlaywrightNUnitFramework:PlaywrightNUnitFramework.Tests.LoginTest.VerifyLoginPageTitleAfterLogin(System.String)",
+  "labels": [
+    {
+      "name": "thread",
+      "value": "ParallelWorker#1"
+    },
+    {
+      "name": "host",
+      "value": "DESKTOP-2Q0TBUG"
+    },
+    {
+      "name": "language",
+      "value": "C#"
+    },
+    {
+      "name": "framework",
+      "value": "NUnit 3"
+    },
+    {
+      "name": "package",
+      "value": "PlaywrightNUnitFramework.Tests"
+    },
+    {
+      "name": "testMethod",
+      "value": "VerifyLoginPageTitleAfterLogin"
+    },
+    {
+      "name": "testClass",
+      "value": "LoginTest"
+    },
+    {
+      "name": "tag",
+      "value": "CrossBrowser"
+    },
+    {
+      "name": "owner",
+      "value": "QA"
+    },
+    {
+      "name": "feature",
+      "value": "Login"
+    },
+    {
+      "name": "suite",
+      "value": "Login Suite"
+    }
+  ],
+  "links": [],
+  "name": "VerifyLoginPageTitleAfterLogin(\"firefox\")",
+  "status": "passed",
+  "stage": "finished",
+  "steps": [],
+  "attachments": [],
+  "parameters": [
+    {
+      "name": "browserName",
+      "value": "\"firefox\"",
+      "excluded": false
+    }
+  ],
+  "start": 1748527259753,
+  "stop": 1748527274396
+}

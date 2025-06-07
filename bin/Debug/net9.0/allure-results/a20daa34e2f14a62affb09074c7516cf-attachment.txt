@@ -1,0 +1,1 @@
+[Allure Screenshot Error] Value cannot be null. (Parameter 'key')

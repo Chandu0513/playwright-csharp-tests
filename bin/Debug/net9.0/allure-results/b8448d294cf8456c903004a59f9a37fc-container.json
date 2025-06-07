@@ -1,0 +1,44 @@
+{
+  "uuid": "615b460b-b6c4-4c4b-838d-da20008f2bb9-tc-0-1000",
+  "name": "PlaywrightNUnitFramework.Tests.LoginTest.VerifyLoginPageTitleAfterLogin(\"firefox\")",
+  "children": [
+    "6413369f-3e64-4388-878e-9ebffcc2401d-tr-0-1002"
+  ],
+  "befores": [
+    {
+      "name": "Setup",
+      "status": "passed",
+      "statusDetails": {
+        "known": false,
+        "muted": false,
+        "flaky": false
+      },
+      "stage": "finished",
+      "steps": [],
+      "attachments": [],
+      "parameters": [],
+      "start": 1748516965631,
+      "stop": 1748516965631
+    }
+  ],
+  "afters": [
+    {
+      "name": "Teardown",
+      "status": "passed",
+      "statusDetails": {
+        "known": false,
+        "muted": false,
+        "flaky": false
+      },
+      "stage": "finished",
+      "steps": [],
+      "attachments": [],
+      "parameters": [],
+      "start": 1748516965631,
+      "stop": 1748516965631
+    }
+  ],
+  "links": [],
+  "start": 1748516959818,
+  "stop": 1748516965633
+}

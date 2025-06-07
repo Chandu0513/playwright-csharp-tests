@@ -1,0 +1,67 @@
+{
+  "uuid": "fe5d876e-fcff-4296-af8e-600ab835738b",
+  "historyId": "4a38eb4ea06b9b4b066a665b2b60d931",
+  "testCaseId": "5e8634a4ea4dc9ae4f498a2c8aba546f",
+  "fullName": "PlaywrightNUnitFramework:PlaywrightNUnitFramework.Tests.LoginTest.VerifyLoginPageTitleAfterLogin(System.String)",
+  "labels": [
+    {
+      "name": "thread",
+      "value": "ParallelWorker#1"
+    },
+    {
+      "name": "host",
+      "value": "DESKTOP-2Q0TBUG"
+    },
+    {
+      "name": "language",
+      "value": "C#"
+    },
+    {
+      "name": "framework",
+      "value": "NUnit 3"
+    },
+    {
+      "name": "package",
+      "value": "PlaywrightNUnitFramework.Tests"
+    },
+    {
+      "name": "testMethod",
+      "value": "VerifyLoginPageTitleAfterLogin"
+    },
+    {
+      "name": "testClass",
+      "value": "LoginTest"
+    },
+    {
+      "name": "tag",
+      "value": "CrossBrowser"
+    },
+    {
+      "name": "owner",
+      "value": "QA"
+    },
+    {
+      "name": "feature",
+      "value": "Login"
+    },
+    {
+      "name": "suite",
+      "value": "Login Suite"
+    }
+  ],
+  "links": [],
+  "name": "VerifyLoginPageTitleAfterLogin(\"chromium\")",
+  "status": "passed",
+  "stage": "finished",
+  "steps": [],
+  "attachments": [],
+  "parameters": [
+    {
+      "name": "browserName",
+      "value": "\"chromium\"",
+      "excluded": false
+    }
+  ],
+  "start": 1748527247600,
+  "stop": 1748527259704
+}

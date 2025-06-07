@@ -1,0 +1,12 @@
+{
+  "uuid": "c416e199-50d1-44d0-8ef8-792061462eb7-tc-0-1000",
+  "name": "PlaywrightNUnitFramework.Tests.LoginTest.VerifyLoginPageTitleAfterLogin(\"firefox\")",
+  "children": [
+    "596fc2af-d66a-4d17-8f74-7015bcf73f52-tr-0-1002"
+  ],
+  "befores": [],
+  "afters": [],
+  "links": [],
+  "start": 1748516126935,
+  "stop": 1748516136080
+}

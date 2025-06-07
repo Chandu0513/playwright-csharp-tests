@@ -1,0 +1,28 @@
+{
+  "uuid": "59b677ab-0ff4-4180-8023-a5d9ae2bd3a7-tc-0-1000",
+  "name": "PlaywrightNUnitFramework.Tests.LoginTest.VerifyLoginPageTitleAfterLogin(\"firefox\")",
+  "children": [
+    "72dc7016-dbfc-43f9-a123-802cd4887b67-tr-0-1002"
+  ],
+  "befores": [],
+  "afters": [
+    {
+      "name": "TearDown",
+      "status": "passed",
+      "statusDetails": {
+        "known": false,
+        "muted": false,
+        "flaky": false
+      },
+      "stage": "finished",
+      "steps": [],
+      "attachments": [],
+      "parameters": [],
+      "start": 1748521942096,
+      "stop": 1748521942096
+    }
+  ],
+  "links": [],
+  "start": 1748521926317,
+  "stop": 1748521942098
+}
