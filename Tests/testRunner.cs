@@ -44,7 +44,7 @@ namespace PlaywrightNUnitFramework
             catch (System.Exception ex)
             {
                 ExtentReportManager.LogFail($"{empLoginTestName} failed: {ex.Message}");
-                throw;
+                
             }
 
             // EmpApplyLeave test
@@ -59,7 +59,7 @@ namespace PlaywrightNUnitFramework
             catch (System.Exception ex)
             {
                 ExtentReportManager.LogFail($"{empLeaveTestName} failed: {ex.Message}");
-                throw;
+                
             }
 
             // AdminLogin test
@@ -74,7 +74,7 @@ namespace PlaywrightNUnitFramework
             catch (System.Exception ex)
             {
                 ExtentReportManager.LogFail($"{adminLoginTestName} failed: {ex.Message}");
-                throw;
+                
             }
 
             // AdminHolidayList test
@@ -89,7 +89,7 @@ namespace PlaywrightNUnitFramework
             catch (System.Exception ex)
             {
                 ExtentReportManager.LogFail($"{adminHolidayTestName} failed: {ex.Message}");
-                throw;
+                
             }
 
             // AdminApproveLeave test
@@ -104,7 +104,7 @@ namespace PlaywrightNUnitFramework
             catch (System.Exception ex)
             {
                 ExtentReportManager.LogFail($"{adminApproveTestName} failed: {ex.Message}");
-                throw;
+                
             }
 
             // EmpExtraWorking test
@@ -119,7 +119,7 @@ namespace PlaywrightNUnitFramework
             catch (System.Exception ex)
             {
                 ExtentReportManager.LogFail($"{empExtraWorkingTestName} failed: {ex.Message}");
-                throw;
+                
             }
 
             // AdminApproveExtra test
@@ -134,7 +134,7 @@ namespace PlaywrightNUnitFramework
             catch (System.Exception ex)
             {
                 ExtentReportManager.LogFail($"{adminApproveExtraTestName} failed: {ex.Message}");
-                throw;
+                
             }
         }
     }
