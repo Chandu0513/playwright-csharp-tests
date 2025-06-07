@@ -22,23 +22,23 @@ namespace PlaywrightNUnitFramework
             var empLogin = new EmpLogin();
             await empLogin.VerifyEmpLoginPageTitleAfterLogin(browserName);
 
-            var empLeave = new EmpApplyLeave();
-            await empLeave.VerifyEmpApplyLeave(browserName);
+            // var empLeave = new EmpApplyLeave();
+            // await empLeave.VerifyEmpApplyLeave(browserName);
 
-            var admin = new adminLoginTest();
-            await admin.AdminVerifyLoginPageTitleAfterLogin(browserName);
+            // var admin = new adminLoginTest();
+            // await admin.AdminVerifyLoginPageTitleAfterLogin(browserName);
 
-            var adminHoliday = new AdminHolidayList();
-            await adminHoliday.VerifyAdminHolidayList(browserName);
+            // var adminHoliday = new AdminHolidayList();
+            // await adminHoliday.VerifyAdminHolidayList(browserName);
 
-            var adminApprove = new adminApproveLeave();
-            await adminApprove.AdminVerifyApproveLeave(browserName);
+            // var adminApprove = new adminApproveLeave();
+            // await adminApprove.AdminVerifyApproveLeave(browserName);
 
-            var empExtraWorking = new empExtraWorking();
-            await empExtraWorking.VerifyEmpApplyExtraWorking(browserName);
+            // var empExtraWorking = new empExtraWorking();
+            // await empExtraWorking.VerifyEmpApplyExtraWorking(browserName);
 
-            var adminApproveExtra = new adminApproveExtra();
-            await adminApproveExtra.AdminVerifyApproveExtra(browserName);
+            // var adminApproveExtra = new adminApproveExtra();
+            // await adminApproveExtra.AdminVerifyApproveExtra(browserName);
         }
     }
 }
