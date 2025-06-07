@@ -32,39 +32,110 @@ namespace PlaywrightNUnitFramework
         [TestCaseSource(nameof(BrowserList))]
         public async Task RunTestsInOrder(string browserName)
         {
-            // Create a test in ExtentReports for this run
-            string testName = $"EmpLogin - {browserName}";
-            ExtentReportManager.CreateTest(testName);
-
+            // EmpLogin test
+            string empLoginTestName = $"EmpLogin - {browserName}";
+            ExtentReportManager.CreateTest(empLoginTestName);
             var empLogin = new EmpLogin();
             try
             {
                 await empLogin.VerifyEmpLoginPageTitleAfterLogin(browserName);
-                ExtentReportManager.LogPass($"{testName} passed");
+                ExtentReportManager.LogPass($"{empLoginTestName} passed");
             }
             catch (System.Exception ex)
             {
-                ExtentReportManager.LogFail($"{testName} failed: {ex.Message}");
-                throw; // rethrow so NUnit marks it failed
+                ExtentReportManager.LogFail($"{empLoginTestName} failed: {ex.Message}");
+                throw;
             }
 
-            // var empLeave = new EmpApplyLeave();
-            // await empLeave.VerifyEmpApplyLeave(browserName);
+            // EmpApplyLeave test
+            string empLeaveTestName = $"EmpApplyLeave - {browserName}";
+            ExtentReportManager.CreateTest(empLeaveTestName);
+            var empLeave = new EmpApplyLeave();
+            try
+            {
+                await empLeave.VerifyEmpApplyLeave(browserName);
+                ExtentReportManager.LogPass($"{empLeaveTestName} passed");
+            }
+            catch (System.Exception ex)
+            {
+                ExtentReportManager.LogFail($"{empLeaveTestName} failed: {ex.Message}");
+                throw;
+            }
 
-            // var admin = new adminLoginTest();
-            // await admin.AdminVerifyLoginPageTitleAfterLogin(browserName);
+            // AdminLogin test
+            string adminLoginTestName = $"AdminLogin - {browserName}";
+            ExtentReportManager.CreateTest(adminLoginTestName);
+            var admin = new adminLoginTest();
+            try
+            {
+                await admin.AdminVerifyLoginPageTitleAfterLogin(browserName);
+                ExtentReportManager.LogPass($"{adminLoginTestName} passed");
+            }
+            catch (System.Exception ex)
+            {
+                ExtentReportManager.LogFail($"{adminLoginTestName} failed: {ex.Message}");
+                throw;
+            }
 
-            // var adminHoliday = new AdminHolidayList();
-            // await adminHoliday.VerifyAdminHolidayList(browserName);
+            // AdminHolidayList test
+            string adminHolidayTestName = $"AdminHolidayList - {browserName}";
+            ExtentReportManager.CreateTest(adminHolidayTestName);
+            var adminHoliday = new AdminHolidayList();
+            try
+            {
+                await adminHoliday.VerifyAdminHolidayList(browserName);
+                ExtentReportManager.LogPass($"{adminHolidayTestName} passed");
+            }
+            catch (System.Exception ex)
+            {
+                ExtentReportManager.LogFail($"{adminHolidayTestName} failed: {ex.Message}");
+                throw;
+            }
 
-            // var adminApprove = new adminApproveLeave();
-            // await adminApprove.AdminVerifyApproveLeave(browserName);
+            // AdminApproveLeave test
+            string adminApproveTestName = $"AdminApproveLeave - {browserName}";
+            ExtentReportManager.CreateTest(adminApproveTestName);
+            var adminApprove = new adminApproveLeave();
+            try
+            {
+                await adminApprove.AdminVerifyApproveLeave(browserName);
+                ExtentReportManager.LogPass($"{adminApproveTestName} passed");
+            }
+            catch (System.Exception ex)
+            {
+                ExtentReportManager.LogFail($"{adminApproveTestName} failed: {ex.Message}");
+                throw;
+            }
 
-            // var empExtraWorking = new empExtraWorking();
-            // await empExtraWorking.VerifyEmpApplyExtraWorking(browserName);
+            // EmpExtraWorking test
+            string empExtraWorkingTestName = $"EmpExtraWorking - {browserName}";
+            ExtentReportManager.CreateTest(empExtraWorkingTestName);
+            var empExtraWorking = new empExtraWorking();
+            try
+            {
+                await empExtraWorking.VerifyEmpApplyExtraWorking(browserName);
+                ExtentReportManager.LogPass($"{empExtraWorkingTestName} passed");
+            }
+            catch (System.Exception ex)
+            {
+                ExtentReportManager.LogFail($"{empExtraWorkingTestName} failed: {ex.Message}");
+                throw;
+            }
 
-            // var adminApproveExtra = new adminApproveExtra();
-            // await adminApproveExtra.AdminVerifyApproveExtra(browserName);
+            // AdminApproveExtra test
+            string adminApproveExtraTestName = $"AdminApproveExtra - {browserName}";
+            ExtentReportManager.CreateTest(adminApproveExtraTestName);
+            var adminApproveExtra = new adminApproveExtra();
+            try
+            {
+                await adminApproveExtra.AdminVerifyApproveExtra(browserName);
+                ExtentReportManager.LogPass($"{adminApproveExtraTestName} passed");
+            }
+            catch (System.Exception ex)
+            {
+                ExtentReportManager.LogFail($"{adminApproveExtraTestName} failed: {ex.Message}");
+                throw;
+            }
         }
     }
 }
