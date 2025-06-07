@@ -1,26 +1,52 @@
+using NUnit.Framework;
 using PlaywrightNUnitFramework.Tests;
 using PlaywrightNUnitFramework.Utils;
-
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace PlaywrightNUnitFramework
 {
     [TestFixture]
-    [Parallelizable(ParallelScope.All)] 
+    [Parallelizable(ParallelScope.All)]
     public class testRunner
     {
         public static IEnumerable<string> BrowserList()
         {
             var config = new TestConfig();
-            return config.Browsers; 
+            return config.Browsers;
+        }
+
+        [OneTimeSetUp]
+        public void InitReport()
+        {
+            ExtentReportManager.InitReport();
+        }
+
+        [OneTimeTearDown]
+        public void TearDownReport()
+        {
+            ExtentReportManager.Flush();
         }
 
         [Test]
         [TestCaseSource(nameof(BrowserList))]
         public async Task RunTestsInOrder(string browserName)
         {
+            // Create a test in ExtentReports for this run
+            string testName = $"EmpLogin - {browserName}";
+            ExtentReportManager.CreateTest(testName);
 
             var empLogin = new EmpLogin();
-            await empLogin.VerifyEmpLoginPageTitleAfterLogin(browserName);
+            try
+            {
+                await empLogin.VerifyEmpLoginPageTitleAfterLogin(browserName);
+                ExtentReportManager.LogPass($"{testName} passed");
+            }
+            catch (System.Exception ex)
+            {
+                ExtentReportManager.LogFail($"{testName} failed: {ex.Message}");
+                throw; // rethrow so NUnit marks it failed
+            }
 
             // var empLeave = new EmpApplyLeave();
             // await empLeave.VerifyEmpApplyLeave(browserName);
