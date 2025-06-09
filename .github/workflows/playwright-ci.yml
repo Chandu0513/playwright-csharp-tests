@@ -8,7 +8,7 @@ on:
 
 jobs:
   build-and-test:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
@@ -29,6 +29,10 @@ jobs:
 
     - name: Build
       run: dotnet build --no-restore --configuration Release
+
+    - name: Run Playwright Tests
+      run: dotnet test --no-build --configuration Release --logger trx
+
 
     # - name: Run Playwright Tests
     #   run: xvfb-run --auto-servernum --server-args='-screen 0 1920x1080x24' dotnet test --no-build --configuration Release
