@@ -45,12 +45,19 @@ namespace PlaywrightNUnitFramework.Pages
 
         public async Task FillDetails()
         {
-
+            // Fill the Hours input
             await _page.FillAsync(allLocators.HoursInputLocator, "8");
+
+            // Select the Lead from the dropdown
             await _page.SelectOptionAsync(allLocators.LeadSelectLocator, new SelectOptionValue { Label = _config.AdminEmail });
+
+            // Click the submit button
             await _page.ClickAsync(allLocators.ExtraworkSubmitButtonLocator);
 
-
+            // Log to Extent Report
+            string logMessage = "Extra work details filled and submitted.";
+            Console.WriteLine(logMessage);  // Console log
+            ExtentReportManager.LogInfo(logMessage);  // Extent Report log
         }
 
         private static Random random = new Random(); // Static Random object
@@ -60,13 +67,19 @@ namespace PlaywrightNUnitFramework.Pages
             var now = DateTime.Now;
             var daysInMonth = DateTime.DaysInMonth(now.Year, now.Month);
 
-            // Use the static random object
+            // Generate a random date within the current month
             int randomDay = random.Next(1, daysInMonth + 1);
             string randomDate = new DateTime(now.Year, now.Month, randomDay).ToString("yyyy-MM-dd");
 
+            // Fill the extra work date field
             await _page.FillAsync(allLocators.ExtraworkDateInputLocator, randomDate);
-            Console.WriteLine($"Entered date: {randomDate}");
+
+            // Log the applied extra working day to console and Extent Report
+            string logMessage = $"Extra working day applied for date: {randomDate}";
+            Console.WriteLine(logMessage);  // Console log
+            ExtentReportManager.LogInfo(logMessage);  // Log to Extent Report
         }
+
 
 
 

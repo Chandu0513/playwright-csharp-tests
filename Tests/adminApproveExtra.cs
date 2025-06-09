@@ -18,7 +18,7 @@ namespace PlaywrightNUnitFramework.Tests
             await adminPage.Navigate();      
             await adminPage.Login();
             await adminPage.GetTitle();
-            await Utils.ApproveExtraWorking("emp007");
+            await Utils.ApproveExtraWorking("EMPD321");
         }
     }
 }

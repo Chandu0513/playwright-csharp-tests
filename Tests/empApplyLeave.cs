@@ -21,7 +21,7 @@ namespace PlaywrightNUnitFramework.Tests
             await emplogin.Login();
             await emplogin.GetTitle();
             await emplogin.ApplyLeave();
-            //await emplogin.ClickOkOnLopWarningModal();
+            await emplogin.ClickOkOnLopWarningModal();
             await emplogin.Leavedatepickup();
             await emplogin.FillLeaveDetails();
             await emplogin.CheckboxSubmit();

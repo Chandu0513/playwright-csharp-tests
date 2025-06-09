@@ -45,24 +45,35 @@ namespace PlaywrightNUnitFramework.Pages
 
         private static Random random = new Random(); // Static Random object
 
-        public async Task Leavedatepickup()
-        {
-            DateTime startRange = new DateTime(2025, 7, 2);
-            DateTime latestStart = new DateTime(2025, 7, 30);
-            int range = (latestStart - startRange).Days;
+    public async Task Leavedatepickup()
+{
+    DateTime startRange = new DateTime(2025, 7, 2);
+    DateTime latestStart = new DateTime(2025, 7, 30);
+    int range = (latestStart - startRange).Days;
 
-            DateTime fromDate = startRange.AddDays(random.Next(range + 1));  // Use static random object
-            DateTime toDate = fromDate.AddDays(1);
+    // Use static random object for generating random dates
+    Random random = new Random();
+    DateTime fromDate = startRange.AddDays(random.Next(range + 1));
+    DateTime toDate = fromDate.AddDays(1);
 
-            string fromDateStr = fromDate.ToString("yyyy-MM-dd");
-            string toDateStr = toDate.ToString("yyyy-MM-dd");
+    string fromDateStr = fromDate.ToString("yyyy-MM-dd");
+    string toDateStr = toDate.ToString("yyyy-MM-dd");
 
-            Console.WriteLine($"Applying leave from {fromDateStr} to {toDateStr}");
+    // Console log for applying leave dates
+    string leaveDatesMessage = $"Applying leave from {fromDateStr} to {toDateStr}";
+    Console.WriteLine(leaveDatesMessage);  // Print to console
 
-            await _page.FillAsync(allLocators.FromDateInput, fromDateStr);
-            await _page.FillAsync(allLocators.ToDateInput, toDateStr);
-            await _page.WaitForTimeoutAsync(200);
-        }
+    // Log the same information to Extent Report
+    ExtentReportManager.LogInfo(leaveDatesMessage);  // Log to Extent Report
+
+    // Fill the leave form with generated dates
+    await _page.FillAsync(allLocators.FromDateInput, fromDateStr);
+    await _page.FillAsync(allLocators.ToDateInput, toDateStr);
+
+    // Optional: Wait for a small timeout for the actions to complete
+    await _page.WaitForTimeoutAsync(200);
+}
+
 
 
         public async Task FillLeaveDetails()

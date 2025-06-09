@@ -45,7 +45,7 @@ namespace PlaywrightNUnitFramework.Utils
             var contextOptions = new BrowserNewContextOptions
             {
                 BaseURL = Config.BaseUrl,
-                ViewportSize = null
+                ViewportSize = null // Allow Playwright to handle viewport size dynamically
             };
 
             if (!string.IsNullOrEmpty(authStoragePath) && File.Exists(authStoragePath))
@@ -55,7 +55,7 @@ namespace PlaywrightNUnitFramework.Utils
             Page = await Context.NewPageAsync();
             Page.SetDefaultTimeout(Config.Timeout);
 
-            // Start Tracing here ✅
+            // Start Tracing
             await Context.Tracing.StartAsync(new TracingStartOptions
             {
                 Screenshots = true,
@@ -63,77 +63,81 @@ namespace PlaywrightNUnitFramework.Utils
                 Sources = true
             });
 
-            // Maximize window if Chromium & not headless
+            // Maximize the window based on screen size (only for non-headless browsers)
             if (browserName.ToLower() == "chromium" && !isHeadless)
             {
+                // Create a CDP session
                 var session = await Context.NewCDPSessionAsync(Page);
+
+                // Fetch screen size (using screenWidth and screenHeight from the CDP session)
+                var screenSize = await session.SendAsync("Browser.getWindowForTarget");
+
+                // Set window bounds to full screen (maximized window)
                 var targetInfo = await session.SendAsync("Browser.getWindowForTarget");
                 int windowId = targetInfo?.GetProperty("windowId")!.GetInt32() ?? 0;
-
                 await session.SendAsync("Browser.setWindowBounds", new Dictionary<string, object>
                 {
                     ["windowId"] = windowId,
                     ["bounds"] = new Dictionary<string, object>
                     {
-                        ["windowState"] = "maximized"
+                        ["windowState"] = "maximized" // Maximize the window
                     }
                 });
             }
         }
 
         [TearDown]
-public async Task AfterEachTest()
-{
-    var testContext = TestContext.CurrentContext;
-    string testName = testContext.Test.Name;
-    string sanitizedTestName = SanitizeFileName(testName);
-
-    if (testContext.Result.FailCount > 0)
-    {
-        ExtentReportManager.LogFail(testContext.Result.Message ?? "Test Failed");
-
-        // Save trace on failure
-        if (Context != null)
+        public async Task AfterEachTest()
         {
-            string traceDir = Path.Combine(ExtentReportManager.ReportRootPath, "Traces");
-            Directory.CreateDirectory(traceDir);
-            string tracePath = Path.Combine(traceDir, $"{sanitizedTestName}.zip");
+            var testContext = TestContext.CurrentContext;
+            string testName = testContext.Test.Name;
+            string sanitizedTestName = SanitizeFileName(testName);
 
-            await Context.Tracing.StopAsync(new TracingStopOptions
+            if (testContext.Result.FailCount > 0)
             {
-                Path = tracePath
-            });
+                ExtentReportManager.LogFail(testContext.Result.Message ?? "Test Failed");
 
-            ExtentReportManager.LogInfo($"Trace saved: <a href='file:///{tracePath}'>Download Trace</a>");
+                // Save trace on failure
+                if (Context != null)
+                {
+                    string traceDir = Path.Combine(ExtentReportManager.ReportRootPath, "Traces");
+                    Directory.CreateDirectory(traceDir);
+                    string tracePath = Path.Combine(traceDir, $"{sanitizedTestName}.zip");
+
+                    await Context.Tracing.StopAsync(new TracingStopOptions
+                    {
+                        Path = tracePath
+                    });
+
+                    ExtentReportManager.LogInfo($"Trace saved: <a href='file:///{tracePath}'>Download Trace</a>");
+                }
+
+                // Take screenshot on failure
+                if (Page != null)
+                {
+                    string screenshotDir = Path.Combine(ExtentReportManager.ReportRootPath, "Screenshots");
+                    Directory.CreateDirectory(screenshotDir);
+                    string screenshotPath = Path.Combine(screenshotDir, $"{sanitizedTestName}.png");
+
+                    var screenshot = await Page.ScreenshotAsync();
+                    await File.WriteAllBytesAsync(screenshotPath, screenshot);
+                    ExtentReportManager.AddScreenshot(screenshotPath);
+                }
+            }
+            else
+            {
+                ExtentReportManager.LogPass("Test Passed");
+
+                if (Context != null)
+                {
+                    await Context.Tracing.StopAsync(); // discard trace on pass
+                }
+            }
+
+            if (Context != null) await Context.CloseAsync();
+            if (Browser != null) await Browser.CloseAsync();
+            Playwright?.Dispose();
         }
-
-        // Take screenshot on failure
-        if (Page != null)
-        {
-            string screenshotDir = Path.Combine(ExtentReportManager.ReportRootPath, "Screenshots");
-            Directory.CreateDirectory(screenshotDir);
-            string screenshotPath = Path.Combine(screenshotDir, $"{sanitizedTestName}.png");
-
-            var screenshot = await Page.ScreenshotAsync();
-            await File.WriteAllBytesAsync(screenshotPath, screenshot);
-            ExtentReportManager.AddScreenshot(screenshotPath);
-        }
-    }
-    else
-    {
-        ExtentReportManager.LogPass("Test Passed");
-
-        if (Context != null)
-        {
-            await Context.Tracing.StopAsync(); // discard trace on pass
-        }
-    }
-
-    if (Context != null) await Context.CloseAsync();
-    if (Browser != null) await Browser.CloseAsync();
-    Playwright?.Dispose();
-}
-
 
         private string SanitizeFileName(string name)
         {
