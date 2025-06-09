@@ -45,7 +45,7 @@ namespace PlaywrightNUnitFramework.Pages
 
         public async Task FillDetails()
         {
-            
+
             await _page.FillAsync(allLocators.HoursInputLocator, "8");
             await _page.SelectOptionAsync(allLocators.LeadSelectLocator, new SelectOptionValue { Label = _config.AdminEmail });
             await _page.ClickAsync(allLocators.ExtraworkSubmitButtonLocator);
@@ -53,16 +53,19 @@ namespace PlaywrightNUnitFramework.Pages
 
         }
 
+        private static Random random = new Random(); // Static Random object
+
         public async Task FillDate()
         {
+            var now = DateTime.Now;
+            var daysInMonth = DateTime.DaysInMonth(now.Year, now.Month);
 
-        var now = DateTime.Now;
-        var daysInMonth = DateTime.DaysInMonth(now.Year, now.Month);
-        var random = new Random();
-        int randomDay = random.Next(1, daysInMonth + 1);
-        string randomDate = new DateTime(now.Year, now.Month, randomDay).ToString("yyyy-MM-dd");
-        await _page.FillAsync(allLocators.ExtraworkDateInputLocator, randomDate);
-        Console.WriteLine($"Entered date: {randomDate}");
+            // Use the static random object
+            int randomDay = random.Next(1, daysInMonth + 1);
+            string randomDate = new DateTime(now.Year, now.Month, randomDay).ToString("yyyy-MM-dd");
+
+            await _page.FillAsync(allLocators.ExtraworkDateInputLocator, randomDate);
+            Console.WriteLine($"Entered date: {randomDate}");
         }
 
 

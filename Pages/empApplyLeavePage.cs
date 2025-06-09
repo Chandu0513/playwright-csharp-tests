@@ -43,15 +43,16 @@ namespace PlaywrightNUnitFramework.Pages
             await _page.ClickAsync(allLocators.ApplyLeaveButton);
         }
 
+        private static Random random = new Random(); // Static Random object
+
         public async Task Leavedatepickup()
         {
-            var random = new Random();
-            DateTime startRange = new DateTime(2025, 7, 02);
+            DateTime startRange = new DateTime(2025, 7, 2);
             DateTime latestStart = new DateTime(2025, 7, 30);
             int range = (latestStart - startRange).Days;
 
-            DateTime fromDate = startRange.AddDays(random.Next(range + 1));
-            DateTime toDate = fromDate.AddDays(2);
+            DateTime fromDate = startRange.AddDays(random.Next(range + 1));  // Use static random object
+            DateTime toDate = fromDate.AddDays(1);
 
             string fromDateStr = fromDate.ToString("yyyy-MM-dd");
             string toDateStr = toDate.ToString("yyyy-MM-dd");
@@ -62,6 +63,7 @@ namespace PlaywrightNUnitFramework.Pages
             await _page.FillAsync(allLocators.ToDateInput, toDateStr);
             await _page.WaitForTimeoutAsync(200);
         }
+
 
         public async Task FillLeaveDetails()
         {
@@ -83,7 +85,7 @@ namespace PlaywrightNUnitFramework.Pages
         {
             var submitButton = _page.Locator(allLocators.SubmitButton, new() { HasTextString = "Submit" });
             await submitButton.ClickAsync();
-            await _page.WaitForTimeoutAsync(4000); 
+            await _page.WaitForTimeoutAsync(4000);
         }
 
         public async Task ClickOkOnLopWarningModal()

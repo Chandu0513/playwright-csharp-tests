@@ -28,7 +28,6 @@ namespace PlaywrightNUnitFramework.Utils
             ExtentReportManager.CreateTest(testName);
         }
 
-        // YOU will still call this inside each test
         public async Task InitializePlaywright(string browserName, string? authStoragePath = null)
         {
             Config = new TestConfig();
@@ -56,6 +55,15 @@ namespace PlaywrightNUnitFramework.Utils
             Page = await Context.NewPageAsync();
             Page.SetDefaultTimeout(Config.Timeout);
 
+            // Start Tracing here ✅
+            await Context.Tracing.StartAsync(new TracingStartOptions
+            {
+                Screenshots = true,
+                Snapshots = true,
+                Sources = true
+            });
+
+            // Maximize window if Chromium & not headless
             if (browserName.ToLower() == "chromium" && !isHeadless)
             {
                 var session = await Context.NewCDPSessionAsync(Page);
@@ -74,41 +82,58 @@ namespace PlaywrightNUnitFramework.Utils
         }
 
         [TearDown]
-        public async Task AfterEachTest()
+public async Task AfterEachTest()
+{
+    var testContext = TestContext.CurrentContext;
+    string testName = testContext.Test.Name;
+    string sanitizedTestName = SanitizeFileName(testName);
+
+    if (testContext.Result.FailCount > 0)
+    {
+        ExtentReportManager.LogFail(testContext.Result.Message ?? "Test Failed");
+
+        // Save trace on failure
+        if (Context != null)
         {
-            var context = TestContext.CurrentContext;
-            string status = context.Result.Outcome.Status.ToString();
-            string testName = context.Test.Name;
+            string traceDir = Path.Combine(ExtentReportManager.ReportRootPath, "Traces");
+            Directory.CreateDirectory(traceDir);
+            string tracePath = Path.Combine(traceDir, $"{sanitizedTestName}.zip");
 
-            if (context.Result.FailCount > 0)
+            await Context.Tracing.StopAsync(new TracingStopOptions
             {
-                ExtentReportManager.LogFail(context.Result.Message);
+                Path = tracePath
+            });
 
-                if (Page != null)
-                {
-                    var screenshotPath = $"TestResults/Screenshots/{SanitizeFileName(testName)}.png";
-                    Directory.CreateDirectory(Path.GetDirectoryName(screenshotPath)!);
-
-                    var screenshot = await Page.ScreenshotAsync();
-                    await File.WriteAllBytesAsync(screenshotPath, screenshot);
-                    ExtentReportManager.AddScreenshot(screenshotPath);
-                }
-            }
-            else
-            {
-                ExtentReportManager.LogPass("Test Passed");
-            }
-
-            if (Context != null) await Context.CloseAsync();
-            if (Browser != null) await Browser.CloseAsync();
-            Playwright?.Dispose();
+            ExtentReportManager.LogInfo($"Trace saved: <a href='file:///{tracePath}'>Download Trace</a>");
         }
 
-        [OneTimeTearDown]
-        public void GlobalTearDown()
+        // Take screenshot on failure
+        if (Page != null)
         {
-            ExtentReportManager.Flush();
+            string screenshotDir = Path.Combine(ExtentReportManager.ReportRootPath, "Screenshots");
+            Directory.CreateDirectory(screenshotDir);
+            string screenshotPath = Path.Combine(screenshotDir, $"{sanitizedTestName}.png");
+
+            var screenshot = await Page.ScreenshotAsync();
+            await File.WriteAllBytesAsync(screenshotPath, screenshot);
+            ExtentReportManager.AddScreenshot(screenshotPath);
         }
+    }
+    else
+    {
+        ExtentReportManager.LogPass("Test Passed");
+
+        if (Context != null)
+        {
+            await Context.Tracing.StopAsync(); // discard trace on pass
+        }
+    }
+
+    if (Context != null) await Context.CloseAsync();
+    if (Browser != null) await Browser.CloseAsync();
+    Playwright?.Dispose();
+}
+
 
         private string SanitizeFileName(string name)
         {
