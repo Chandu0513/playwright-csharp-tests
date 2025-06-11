@@ -15,16 +15,21 @@ namespace PlaywrightNUnitFramework.Utils
 
         public static void InitReport()
         {
-            ReportRootPath = @"C:\Users\Admin\PlaywrightNUnitFramework\TestReports";
+            // Generate report directory relative to current base directory
+            var baseDir = AppContext.BaseDirectory;
+            ReportRootPath = Path.Combine(baseDir, "TestReports");
+
             Directory.CreateDirectory(ReportRootPath);
 
-            var htmlReporter = new ExtentSparkReporter(Path.Combine(ReportRootPath, "ExtentReport.html"));
+            var reportPath = Path.Combine(ReportRootPath, "ExtentReport.html");
+            var htmlReporter = new ExtentSparkReporter(reportPath);
             htmlReporter.Config.DocumentTitle = "Playwright Test Report";
             htmlReporter.Config.ReportName = "Execution Report";
 
             _extent = new ExtentReports();
             _extent.AttachReporter(htmlReporter);
         }
+
 
         public static void CreateTest(string testName)
         {
