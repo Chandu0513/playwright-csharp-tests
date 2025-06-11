@@ -21,13 +21,16 @@ jobs:
     - name: Setup .NET SDK
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: '8.0.x'  # Change to your .NET version
+        dotnet-version: '8.0.x'  # Use your target version
 
     - name: Restore dependencies
       run: dotnet restore
 
     - name: Build project
       run: dotnet build --no-restore --configuration Release
+
+    - name: Install Playwright browsers
+      run: pwsh ./bin/Release/net8.0/playwright.ps1 install
 
     - name: Run tests
       run: dotnet test --no-build --configuration Release --logger "trx"
