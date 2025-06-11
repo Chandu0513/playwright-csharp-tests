@@ -19,17 +19,9 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Manually install latest LTS .NET SDK
+    - name: Add .NET tools to PATH
       shell: powershell
-      run: |
-        $dotnetRoot = "C:\actions-runner\dotnet"
-        $env:DOTNET_INSTALL_DIR = $dotnetRoot
-        Invoke-WebRequest -Uri https://dot.net/v1/dotnet-install.ps1 -OutFile dotnet-install.ps1
-        powershell.exe -ExecutionPolicy Bypass -File .\dotnet-install.ps1 -InstallDir $dotnetRoot
-
-    - name: Add custom .NET SDK to PATH
-      shell: powershell
-      run: echo "C:\actions-runner\dotnet" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8
+      run: echo "$env:USERPROFILE\.dotnet\tools" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8
 
     - name: Restore dependencies
       shell: powershell
@@ -39,15 +31,11 @@ jobs:
       shell: powershell
       run: dotnet build --no-restore --configuration Release
 
-    - name: Add .dotnet tools to PATH
-      shell: powershell
-      run: echo "$env:USERPROFILE\.dotnet\tools" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8
-
     - name: Install Playwright CLI (latest)
       shell: powershell
       run: dotnet tool install --global Microsoft.Playwright.CLI
 
-    - name: Install Playwright browsers (latest)
+    - name: Install Playwright browsers
       shell: powershell
       run: playwright install
 
