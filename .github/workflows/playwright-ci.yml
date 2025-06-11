@@ -19,26 +19,20 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    # - name: Add .NET tools to PATH
-    #   shell: powershell
-    #   run: echo "$env:USERPROFILE\.dotnet\tools" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8
-
     - name: Restore dependencies
-      shell: powershell
       run: dotnet restore
 
     - name: Build project
-      shell: powershell
       run: dotnet build --no-restore --configuration Release
 
     - name: Install Playwright CLI (latest)
-      shell: powershell
       run: dotnet tool install --global Microsoft.Playwright.CLI
 
+    - name: Add .NET tools to PATH (for Playwright CLI)
+      run: echo %USERPROFILE%\.dotnet\tools >> %GITHUB_PATH%
+
     - name: Install Playwright browsers
-      shell: powershell
       run: playwright install
 
     - name: Run tests
-      shell: powershell
       run: dotnet test --no-build --configuration Release --logger "trx"
