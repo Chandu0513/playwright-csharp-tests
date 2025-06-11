@@ -1,10 +1,14 @@
-name: Playwright C# CI
+name: .NET Playwright CI
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
+      - master
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
+      - master
 
 jobs:
   build-and-test:
@@ -14,25 +18,16 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Setup .NET
+    - name: Setup .NET SDK
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: '8.0.x'
+        dotnet-version: '8.0.x'  # Change to your .NET version
 
     - name: Restore dependencies
       run: dotnet restore
 
-    - name: Build
+    - name: Build project
       run: dotnet build --no-restore --configuration Release
 
-    - name: Install Playwright CLI tool
-      run: dotnet tool install --global Microsoft.Playwright.CLI
-
-    - name: Add dotnet tools to PATH
-      run: echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
-
-    - name: Install Playwright browsers
-      run: playwright install
-
-    - name: Run Playwright Tests
-      run: dotnet test --no-build --configuration Release --logger trx
+    - name: Run tests
+      run: dotnet test --no-build --configuration Release --logger "trx"
