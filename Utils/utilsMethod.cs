@@ -167,8 +167,39 @@ namespace PlaywrightNUnitFramework.Pages
             ExtentReportManager.LogInfo(notFoundMessage);  // Log to Extent Report
         }
 
+public static class ScreenshotHelper
+    {
+        private static readonly string ScreenshotsDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\Screenshots");
 
+        private static bool isCleared = false;
+
+        public static void ClearOldScreenshots()
+        {
+            if (Directory.Exists(ScreenshotsDir))
+            {
+                Directory.Delete(ScreenshotsDir, true);
+            }
+            Directory.CreateDirectory(ScreenshotsDir);
+            isCleared = true;
+        }
+
+        public static async Task<string> CaptureScreenshotAsync(IPage page, string testName)
+        {
+            if (!isCleared)
+            {
+                ClearOldScreenshots(); // Only clears once
+            }
+
+            string fileName = $"{testName}_{DateTime.Now:yyyyMMdd_HHmmss}.png";
+            string filePath = Path.Combine(ScreenshotsDir, fileName);
+
+            await page.ScreenshotAsync(new PageScreenshotOptions { Path = filePath, FullPage = true });
+
+            return filePath;
+        }
+    }
+}
 
 
     }
-}
+

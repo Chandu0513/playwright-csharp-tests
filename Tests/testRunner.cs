@@ -3,11 +3,12 @@ using PlaywrightNUnitFramework.Tests;
 using PlaywrightNUnitFramework.Utils;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using static PlaywrightNUnitFramework.Pages.utilsMethod;
 
 namespace PlaywrightNUnitFramework
 {
     [TestFixture]
-    [Parallelizable(ParallelScope.All)]
+    [Parallelizable(ParallelScope.Self)] // Ensures tests run sequentially in this class
     public class testRunner
     {
         public static IEnumerable<string> BrowserList()
@@ -20,6 +21,7 @@ namespace PlaywrightNUnitFramework
         public void InitReport()
         {
             ExtentReportManager.InitReport();
+            ScreenshotHelper.ClearOldScreenshots();
         }
 
         [OneTimeTearDown]
@@ -28,113 +30,137 @@ namespace PlaywrightNUnitFramework
             ExtentReportManager.Flush();
         }
 
-        [Test]
+        [Test, Order(1)]
         [TestCaseSource(nameof(BrowserList))]
-        public async Task RunTestsInOrder(string browserName)
+        public async Task EmpLoginTest(string browserName)
         {
-            // EmpLogin test
-            string empLoginTestName = $"EmpLogin - {browserName}";
-            ExtentReportManager.CreateTest(empLoginTestName);
+            string testName = $"EmpLogin - {browserName}";
+            ExtentReportManager.CreateTest(testName);
             var empLogin = new EmpLogin();
             try
             {
                 await empLogin.VerifyEmpLoginPageTitleAfterLogin(browserName);
-                ExtentReportManager.LogPass($"{empLoginTestName} passed");
+                ExtentReportManager.LogPass($"{testName} passed");
             }
             catch (System.Exception ex)
             {
-                ExtentReportManager.LogFail($"{empLoginTestName} failed: {ex.Message}");
-                
+                ExtentReportManager.LogFail($"{testName} failed: {ex.Message}");
+                throw;
             }
+        }
 
-            // EmpApplyLeave test
-            string empLeaveTestName = $"EmpApplyLeave - {browserName}";
-            ExtentReportManager.CreateTest(empLeaveTestName);
+        [Test, Order(2)]
+        [TestCaseSource(nameof(BrowserList))]
+        public async Task EmpApplyLeaveTest(string browserName)
+        {
+            string testName = $"EmpApplyLeave - {browserName}";
+            ExtentReportManager.CreateTest(testName);
             var empLeave = new EmpApplyLeave();
             try
             {
                 await empLeave.VerifyEmpApplyLeave(browserName);
-                ExtentReportManager.LogPass($"{empLeaveTestName} passed");
+                ExtentReportManager.LogPass($"{testName} passed");
             }
             catch (System.Exception ex)
-            {
-                ExtentReportManager.LogFail($"{empLeaveTestName} failed: {ex.Message}");
-                
+        
+                {
+                ExtentReportManager.LogFail($"{testName} failed: {ex.Message}");
+                throw;
             }
+        }
 
-            // AdminLogin test
-            string adminLoginTestName = $"AdminLogin - {browserName}";
-            ExtentReportManager.CreateTest(adminLoginTestName);
+        [Test, Order(3)]
+        [TestCaseSource(nameof(BrowserList))]
+        public async Task AdminLoginTest(string browserName)
+        {
+            string testName = $"AdminLogin - {browserName}";
+            ExtentReportManager.CreateTest(testName);
             var admin = new adminLoginTest();
             try
             {
                 await admin.AdminVerifyLoginPageTitleAfterLogin(browserName);
-                ExtentReportManager.LogPass($"{adminLoginTestName} passed");
+                ExtentReportManager.LogPass($"{testName} passed");
             }
             catch (System.Exception ex)
             {
-                ExtentReportManager.LogFail($"{adminLoginTestName} failed: {ex.Message}");
-                
+                ExtentReportManager.LogFail($"{testName} failed: {ex.Message}");
+                throw;
             }
+        }
 
-            // AdminHolidayList test
-            string adminHolidayTestName = $"AdminHolidayList - {browserName}";
-            ExtentReportManager.CreateTest(adminHolidayTestName);
+        [Test, Order(4)]
+        [TestCaseSource(nameof(BrowserList))]
+        public async Task AdminHolidayListTest(string browserName)
+        {
+            string testName = $"AdminHolidayList - {browserName}";
+            ExtentReportManager.CreateTest(testName);
             var adminHoliday = new AdminHolidayList();
             try
             {
                 await adminHoliday.VerifyAdminHolidayList(browserName);
-                ExtentReportManager.LogPass($"{adminHolidayTestName} passed");
+                ExtentReportManager.LogPass($"{testName} passed");
             }
             catch (System.Exception ex)
             {
-                ExtentReportManager.LogFail($"{adminHolidayTestName} failed: {ex.Message}");
-                
+                ExtentReportManager.LogFail($"{testName} failed: {ex.Message}");
+                throw;
             }
+        }
 
-            // AdminApproveLeave test
-            string adminApproveTestName = $"AdminApproveLeave - {browserName}";
-            ExtentReportManager.CreateTest(adminApproveTestName);
+        [Test, Order(5)]
+        [TestCaseSource(nameof(BrowserList))]
+        public async Task AdminApproveLeaveTest(string browserName)
+        {
+            string testName = $"AdminApproveLeave - {browserName}";
+            ExtentReportManager.CreateTest(testName);
             var adminApprove = new adminApproveLeave();
             try
             {
                 await adminApprove.AdminVerifyApproveLeave(browserName);
-                ExtentReportManager.LogPass($"{adminApproveTestName} passed");
+                ExtentReportManager.LogPass($"{testName} passed");
             }
             catch (System.Exception ex)
             {
-                ExtentReportManager.LogFail($"{adminApproveTestName} failed: {ex.Message}");
-                
+                ExtentReportManager.LogFail($"{testName} failed: {ex.Message}");
+                throw;
             }
+        }
 
-            // EmpExtraWorking test
-            string empExtraWorkingTestName = $"EmpExtraWorking - {browserName}";
-            ExtentReportManager.CreateTest(empExtraWorkingTestName);
+        [Test, Order(6)]
+        [TestCaseSource(nameof(BrowserList))]
+        public async Task EmpExtraWorkingTest(string browserName)
+        {
+            string testName = $"EmpExtraWorking - {browserName}";
+            ExtentReportManager.CreateTest(testName);
             var empExtraWorking = new empExtraWorking();
             try
             {
                 await empExtraWorking.VerifyEmpApplyExtraWorking(browserName);
-                ExtentReportManager.LogPass($"{empExtraWorkingTestName} passed");
+                ExtentReportManager.LogPass($"{testName} passed");
             }
             catch (System.Exception ex)
             {
-                ExtentReportManager.LogFail($"{empExtraWorkingTestName} failed: {ex.Message}");
-                
+                ExtentReportManager.LogFail($"{testName} failed: {ex.Message}");
+                throw;
             }
+        }
 
-            // AdminApproveExtra test
-            string adminApproveExtraTestName = $"AdminApproveExtra - {browserName}";
-            ExtentReportManager.CreateTest(adminApproveExtraTestName);
+        [Test, Order(7)]
+        [TestCaseSource(nameof(BrowserList))]
+        public async Task AdminApproveExtraTest(string browserName)
+        {
+            string testName = $"AdminApproveExtra - {browserName}";
+            ExtentReportManager.CreateTest(testName);
             var adminApproveExtra = new adminApproveExtra();
             try
             {
                 await adminApproveExtra.AdminVerifyApproveExtra(browserName);
-                ExtentReportManager.LogPass($"{adminApproveExtraTestName} passed");
+                ExtentReportManager.LogPass($"{testName} passed");
             }
             catch (System.Exception ex)
             {
-                ExtentReportManager.LogFail($"{adminApproveExtraTestName} failed: {ex.Message}");
-                
+                ExtentReportManager.LogFail($"{testName} failed: {ex.Message}");
+                throw;
             }
         }
     }

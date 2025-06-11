@@ -41,11 +41,6 @@ namespace PlaywrightNUnitFramework.Utils
                 CurrentTest.Info(message);
         }
 
-        public static void AddScreenshot(string screenshotPath) =>
-            _currentTest?.AddScreenCaptureFromPath(screenshotPath);
-
         public static void Flush() => _extent?.Flush();
     }
-
 }
-
