@@ -21,18 +21,24 @@ jobs:
 
     - name: Restore dependencies
       run: dotnet restore
+      shell: cmd
 
     - name: Build project
       run: dotnet build --no-restore --configuration Release
+      shell: cmd
 
     - name: Install Playwright CLI (latest)
       run: dotnet tool install --global Microsoft.Playwright.CLI
+      shell: cmd
 
     - name: Add .NET tools to PATH (for Playwright CLI)
       run: echo %USERPROFILE%\.dotnet\tools >> %GITHUB_PATH%
+      shell: cmd
 
     - name: Install Playwright browsers
       run: playwright install
+      shell: cmd
 
     - name: Run tests
       run: dotnet test --no-build --configuration Release --logger "trx"
+      shell: cmd
