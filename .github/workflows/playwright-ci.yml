@@ -26,7 +26,7 @@ jobs:
       run: dotnet build --no-restore --configuration Release
 
     - name: Install Playwright CLI tool
-      run: dotnet tool install --global Microsoft.Playwright.CLI --version 1.37.0
+      run: dotnet tool install --global Microsoft.Playwright.CLI
 
     - name: Add dotnet tools to PATH
       run: echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
