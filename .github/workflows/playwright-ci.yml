@@ -19,9 +19,9 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Add .NET tools to PATH
-      shell: powershell
-      run: echo "$env:USERPROFILE\.dotnet\tools" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8
+    # - name: Add .NET tools to PATH
+    #   shell: powershell
+    #   run: echo "$env:USERPROFILE\.dotnet\tools" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8
 
     - name: Restore dependencies
       shell: powershell
