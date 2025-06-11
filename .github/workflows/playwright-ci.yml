@@ -19,10 +19,16 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Setup .NET SDK
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: '8.0.x'  # Use your target version
+    - name: Manually install .NET SDK to custom directory
+      run: |
+        $dotnetRoot = "C:\actions-runner\dotnet"
+        $env:DOTNET_INSTALL_DIR = $dotnetRoot
+        Invoke-WebRequest -Uri https://dot.net/v1/dotnet-install.ps1 -OutFile dotnet-install.ps1
+        pwsh ./dotnet-install.ps1 -Channel 8.0 -InstallDir $dotnetRoot
+      shell: pwsh
+
+    - name: Add custom .NET SDK to PATH
+      run: echo "C:\actions-runner\dotnet" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8
 
     - name: Restore dependencies
       run: dotnet restore
@@ -30,13 +36,14 @@ jobs:
     - name: Build project
       run: dotnet build --no-restore --configuration Release
 
+    - name: Add .dotnet tools to PATH
+      run: echo "$env:USERPROFILE\.dotnet\tools" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8
+
+    - name: Install Playwright CLI (global tool)
+      run: dotnet tool install --global Microsoft.Playwright.CLI --version 1.37.0
+
     - name: Install Playwright browsers
-      run: pwsh ./bin/Release/net8.0/playwright.ps1 install
+      run: playwright install
 
-    - name: Run tests with xvfb (headed mode)
-      run: xvfb-run dotnet test --no-build --configuration Release --logger "trx"
-
-    # - name: Run tests in headless mode (recommended)
-    #   run: dotnet test --no-build --configuration Release --logger "trx"
-
-      
+    - name: Run tests
+      run: dotnet test --no-build --configuration Release --logger "trx"
