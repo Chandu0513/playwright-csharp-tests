@@ -42,7 +42,7 @@ namespace PlaywrightNUnitFramework.Pages
         string name = await nameLocator.InnerTextAsync();
         string date = await dateLocator.InnerTextAsync();
 
-        // Log the holiday name and date to both the console and the Extent Report
+        //// Log the holiday name and date to both the console and the Extent Report
         string holidayMessage = $"Holiday {i + 1}: {name} on {date}";
         Console.WriteLine(holidayMessage);  // Console Output
         ExtentReportManager.LogInfo(holidayMessage);  // Extent Report Output
