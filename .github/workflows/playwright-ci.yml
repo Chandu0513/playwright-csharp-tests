@@ -32,8 +32,9 @@ jobs:
       shell: cmd
 
     - name: Install Playwright Browsers (automated)
-      run: pwsh bin/Release/net8.0/playwright.ps1 install
-      shell: pwsh  
+      run: bin/Release/net8.0/playwright.ps1 install
+      shell: cmd
+  
 
     - name: Run tests
       run: dotnet test --no-build --configuration Release --logger "trx"
