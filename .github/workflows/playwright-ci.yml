@@ -31,8 +31,11 @@ jobs:
       run: echo %USERPROFILE%\.dotnet\tools >> %GITHUB_PATH%
       shell: cmd
 
+    - name: Install Playwright Browsers (automated)
+      run: pwsh bin/Release/net8.0/playwright.ps1 install
+      shell: pwsh  
+
     - name: Run tests
       run: dotnet test --no-build --configuration Release --logger "trx"
       shell: cmd
-      env:
-        PLAYWRIGHT_BROWSERS_PATH: C:\Windows\ServiceProfiles\NetworkService\AppData\Local\ms-playwright
+  
