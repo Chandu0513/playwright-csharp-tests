@@ -31,9 +31,9 @@ jobs:
       run: echo %USERPROFILE%\.dotnet\tools >> %GITHUB_PATH%
       shell: cmd
 
-    - name: Install Playwright browsers
-      run: playwright install
-      shell: cmd
+    # - name: Install Playwright browsers
+    #   run: playwright install
+    #   shell: cmd
 
     - name: Run tests
       run: dotnet test --no-build --configuration Release --logger "trx"
