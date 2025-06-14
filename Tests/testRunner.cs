@@ -8,7 +8,7 @@ using static PlaywrightNUnitFramework.Pages.utilsMethod;
 namespace PlaywrightNUnitFramework
 {
     [TestFixture]
-    [Parallelizable(ParallelScope.Self)] // Ensures tests run sequentially in this class
+    [Parallelizable(ParallelScope.Self)] 
     public class testRunner
     {
         public static IEnumerable<string> BrowserList()

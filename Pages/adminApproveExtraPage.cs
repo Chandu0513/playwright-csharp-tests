@@ -9,17 +9,17 @@ namespace PlaywrightNUnitFramework.Pages
     {
         private readonly IPage _page;
         private readonly TestConfig _config;
-        
+
 
 
         public adminApproveExtraPage(IPage page, TestConfig config)
         {
             _page = page;
             _config = config;
-            
+
         }
 
-       
+
 
         public async Task Navigate()
         {
@@ -41,14 +41,14 @@ namespace PlaywrightNUnitFramework.Pages
             Assert.That(title, Is.EqualTo(expectedTitle), "Title after login is incorrect.");
         }
 
-         public async Task Reimbursement()
+        public async Task Reimbursement()
         {
             await _page.ClickAsync(allLocators.ReimbursementLocator);
             await _page.ClickAsync(allLocators.RequestsButton);
 
         }
 
-        
+
         public async Task ApproveExtraWorking(string employeeId)
         {
             await _page.ClickAsync(allLocators.LeaveManagement);

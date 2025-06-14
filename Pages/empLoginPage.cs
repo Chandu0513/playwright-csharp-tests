@@ -37,6 +37,6 @@ namespace PlaywrightNUnitFramework.Pages
             Assert.That(title, Is.EqualTo("urBuddi"), "Title after login is incorrect.");
         }
 
-        
+
     }
 }

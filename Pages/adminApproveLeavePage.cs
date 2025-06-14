@@ -9,14 +9,14 @@ namespace PlaywrightNUnitFramework.Pages
     {
         private readonly IPage _page;
         private readonly TestConfig _config;
-        
+
 
 
         public adminApproveLeavePage(IPage page, TestConfig config)
         {
             _page = page;
             _config = config;
-            
+
         }
 
         public async Task Navigate()

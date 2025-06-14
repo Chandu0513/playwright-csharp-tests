@@ -8,14 +8,14 @@ namespace PlaywrightNUnitFramework.Pages
     {
         private readonly IPage _page;
         private readonly TestConfig _config;
-        
+
 
 
         public adminLoginPage(IPage page, TestConfig config)
         {
             _page = page;
             _config = config;
-            
+
         }
 
         public async Task Navigate()
@@ -38,7 +38,7 @@ namespace PlaywrightNUnitFramework.Pages
             Assert.That(title, Is.EqualTo(expectedTitle), "Title after login is incorrect.");
         }
 
-        
+
 
     }
 }
