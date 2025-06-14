@@ -35,7 +35,11 @@ namespace PlaywrightNUnitFramework.Pages
         {
             var title = await _page.TitleAsync();
             Assert.That(title, Is.EqualTo("urBuddi"), "Title after login is incorrect.");
+            var dashboardElement = _page.Locator("p.sc-feUZmu.qNlEl", new() { HasText = "Dashboard" });
+            var isDashboardVisible = await dashboardElement.IsVisibleAsync();
+            Assert.That(isDashboardVisible, Is.True, "Expected Dashboard element is not visible.");
         }
+
 
 
     }
