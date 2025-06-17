@@ -13,4 +13,4 @@ if (-Not (Test-Path $DeployPath)) {
 Write-Host "Copying files..."
 Copy-Item "$BuildOutput\*" "$DeployPath" -Recurse -Force
 
-Write-Host "Hey explorer from optimworks. The Deployment completed successfully."
+Write-Host "Hey explorer from optimworks. The Deployment completed successfully.Check"
