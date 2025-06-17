@@ -12,6 +12,12 @@ jobs:
     runs-on: [self-hosted]
 
     steps:
+
+    - name: Mark repo as safe directory
+      run: |
+        git config --global --add safe.directory "C:/actions-runner/_work/playwright-csharp-tests/playwright-csharp-tests"
+      shell: cmd  
+
     - name: Checkout code
       uses: actions/checkout@v3
 
