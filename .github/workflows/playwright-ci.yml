@@ -15,29 +15,31 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Set safe Git directory (for self-hosted runners)
-      run: git config --global --add safe.directory "${{ github.workspace }}"
-
-    - name: Setup .NET 8
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: '8.0.x'
-
     - name: Restore dependencies
       run: dotnet restore
+      shell: cmd
 
     - name: Build project
       run: dotnet build --no-restore --configuration Release
+      shell: cmd
 
-    - name: Install Playwright Browsers
-      run: |
-        dotnet tool restore
-        dotnet playwright install
+    - name: Install Playwright CLI (latest)
+      run: dotnet tool install --global Microsoft.Playwright.CLI
+      shell: cmd
 
-    - name: Run tests (capture failure but continue)
-      run: |
-        dotnet test --no-build --configuration Release --logger "trx;LogFileName=test-results.trx" || echo "Test failures occurred."
-      
-    - name: Deploy or Copy Report to Folder (always runs)
-      if: always()
+    - name: Add .NET tools folder to PATH
+      run: echo %USERPROFILE%\.dotnet\tools >> %GITHUB_PATH%
+      shell: cmd
+
+    - name: Install Playwright Browsers (automated)
+      run: powershell -ExecutionPolicy Bypass -File bin\Release\net8.0\playwright.ps1 install
+      shell: cmd
+
+    - name: Run tests
+      run: dotnet test --no-build --configuration Release --logger "trx"
+      shell: cmd
+
+    - name: Deploy to local folder
+      if: success()
       run: powershell -ExecutionPolicy Bypass -File deploy.ps1
+      shell: cmd
