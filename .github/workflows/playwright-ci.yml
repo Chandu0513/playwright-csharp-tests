@@ -15,40 +15,31 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Set environment variables for headed mode
-      run: |
-        echo "HEADLESS=false" >> $env:GITHUB_ENV
-        echo "PLAYWRIGHT_BROWSERS_PATH=0" >> $env:GITHUB_ENV
-        echo "DOTNET_ROOT=$env:USERPROFILE\.dotnet" >> $env:GITHUB_ENV
-      shell: pwsh
-
     - name: Restore dependencies
       run: dotnet restore
-      shell: pwsh
+      shell: cmd
 
     - name: Build project
       run: dotnet build --no-restore --configuration Release
-      shell: pwsh
+      shell: cmd
 
     - name: Install Playwright CLI (latest)
       run: dotnet tool install --global Microsoft.Playwright.CLI
-      shell: pwsh
+      shell: cmd
 
     - name: Add .NET tools folder to PATH
-      run: echo "$env:USERPROFILE\.dotnet\tools" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
-      shell: pwsh
+      run: echo %USERPROFILE%\.dotnet\tools >> %GITHUB_PATH%
+      shell: cmd
 
-    - name: Install Playwright Browsers
-      run: |
-        pwsh -ExecutionPolicy Bypass -Command "bin\Release\net8.0\playwright.ps1 install"
-      shell: pwsh
+    - name: Install Playwright Browsers (automated)
+      run: powershell -ExecutionPolicy Bypass -File bin\Release\net8.0\playwright.ps1 install
+      shell: cmd
 
-    - name: Run tests (headed mode)
+    - name: Run tests
       run: dotnet test --no-build --configuration Release --logger "trx"
-      shell: pwsh
+      shell: cmd
 
     - name: Deploy to local folder
       if: success()
-      run: |
-        pwsh -ExecutionPolicy Bypass -File deploy.ps1
-      shell: pwsh
+      run: powershell -ExecutionPolicy Bypass -File deploy.ps1
+      shell: cmd
