@@ -16,11 +16,11 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Set environment variables
-      shell: pwsh
+      shell: powershell
       run: |
-        echo "HEADLESS=false" >> $env:GITHUB_ENV
-        echo "PLAYWRIGHT_BROWSERS_PATH=0" >> $env:GITHUB_ENV
-        echo "DOTNET_ROOT=$env:USERPROFILE\.dotnet" >> $env:GITHUB_ENV
+        Add-Content -Path $env:GITHUB_ENV -Value "HEADLESS=false"
+        Add-Content -Path $env:GITHUB_ENV -Value "PLAYWRIGHT_BROWSERS_PATH=0"
+        Add-Content -Path $env:GITHUB_ENV -Value "DOTNET_ROOT=$env:USERPROFILE\.dotnet"
 
     - name: Restore dependencies
       run: dotnet restore
