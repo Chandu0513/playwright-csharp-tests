@@ -43,5 +43,5 @@ if (Test-Path $TestResultsPath) {
     Write-Host "`n⚠️ No test results found to copy."
 }
 
-Write-Host "`n🎯 Hey explorer from OptimWorks. Deployment script completed."
+Write-Host "`n Hey explorer from OptimWorks. Deployment script completed."
 Write-Host "==============================================="
