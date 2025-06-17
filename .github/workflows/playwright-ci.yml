@@ -43,3 +43,4 @@ jobs:
       if: always()
       run: powershell -ExecutionPolicy Bypass -File deploy.ps1
       shell: cmd
+
