@@ -48,8 +48,8 @@ namespace PlaywrightNUnitFramework.Pages
         public async Task Leavedatepickup()
         {
             
-            DateTime startRange = new DateTime(2025, 6, 16);
-            DateTime latestStart = new DateTime(2025, 7, 30);
+            DateTime startRange = new DateTime(2025, 6, 10);
+            DateTime latestStart = new DateTime(2025, 6, 10);
             int range = (latestStart - startRange).Days;
             Random random = new Random();
             DateTime fromDate = startRange.AddDays(random.Next(range + 1));
