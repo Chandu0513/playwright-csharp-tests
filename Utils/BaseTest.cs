@@ -54,7 +54,7 @@ namespace PlaywrightNUnitFramework.Utils
             Page = await Context.NewPageAsync();
             Page.SetDefaultTimeout(Config.Timeout);
 
-            // Maximize window (only for Chromium non-headless)
+            
             if (browserName.ToLower() == "chromium" && !isHeadless)
             {
                 var session = await Context.NewCDPSessionAsync(Page);

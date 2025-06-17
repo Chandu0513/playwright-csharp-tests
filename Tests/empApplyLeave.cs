@@ -7,11 +7,11 @@ using Microsoft.Playwright;
 
 namespace PlaywrightNUnitFramework.Tests
 {
-   
+
     public class EmpApplyLeave : BaseTest
     {
+        public IPage? TestPage => Page;
 
-              
         public async Task VerifyEmpApplyLeave(string browserName)
         {
             await InitializePlaywright(browserName);
@@ -21,7 +21,7 @@ namespace PlaywrightNUnitFramework.Tests
             await emplogin.Login();
             await emplogin.GetTitle();
             await emplogin.ApplyLeave();
-           // await emplogin.ClickOkOnLopWarningModal();
+            await emplogin.ClickOkOnLopWarningModal();
             await emplogin.Leavedatepickup();
             await emplogin.FillLeaveDetails();
             await emplogin.CheckboxSubmit();

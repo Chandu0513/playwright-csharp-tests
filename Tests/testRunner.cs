@@ -8,7 +8,7 @@ using static PlaywrightNUnitFramework.Pages.utilsMethod;
 namespace PlaywrightNUnitFramework
 {
     [TestFixture]
-    [Parallelizable(ParallelScope.Self)] 
+    [Parallelizable(ParallelScope.Self)]
     public class testRunner
     {
         public static IEnumerable<string> BrowserList()
@@ -30,44 +30,47 @@ namespace PlaywrightNUnitFramework
             ExtentReportManager.Flush();
         }
 
-        [Test, Order(1)]
+        // [Test, Order(1)]
+        // [TestCaseSource(nameof(BrowserList))]
+        // public async Task EmpLoginTest(string browserName)
+        // {
+        //     string testName = $"EmpLogin - {browserName}";
+        //     ExtentReportManager.CreateTest(testName);
+        //     var empLogin = new EmpLogin();
+        //     try
+        //     {
+        //         await empLogin.VerifyEmpLoginPageTitleAfterLogin(browserName);
+        //         ExtentReportManager.LogPass($"{testName} passed");
+        //     }
+        //     catch (System.Exception ex)
+        //     {
+        //         var screenshotPath = await ScreenshotHelper.CaptureScreenshot(empLogin.TestPage!, testName);
+        //         ExtentReportManager.LogFail($"{testName} failed: {ex.Message}");
+        //         ExtentReportManager.AttachScreenshot(screenshotPath);
+        //         throw;
+        //     }
+        // }
+
+        [Test, Order(2)]
         [TestCaseSource(nameof(BrowserList))]
-        public async Task EmpLoginTest(string browserName)
+        public async Task EmpApplyLeaveTest(string browserName)
         {
-            string testName = $"EmpLogin - {browserName}";
+            string testName = $"EmpApplyLeave - {browserName}";
             ExtentReportManager.CreateTest(testName);
-            var empLogin = new EmpLogin();
+            var empLeave = new EmpApplyLeave();
             try
             {
-                await empLogin.VerifyEmpLoginPageTitleAfterLogin(browserName);
+                await empLeave.VerifyEmpApplyLeave(browserName);
                 ExtentReportManager.LogPass($"{testName} passed");
             }
             catch (System.Exception ex)
             {
+                var screenshotPath = await ScreenshotHelper.CaptureScreenshot(empLeave.TestPage!, testName);
                 ExtentReportManager.LogFail($"{testName} failed: {ex.Message}");
+                ExtentReportManager.AttachScreenshot(screenshotPath);
                 throw;
             }
         }
-
-        // [Test, Order(2)]
-        // [TestCaseSource(nameof(BrowserList))]
-        // public async Task EmpApplyLeaveTest(string browserName)
-        // {
-        //     string testName = $"EmpApplyLeave - {browserName}";
-        //     ExtentReportManager.CreateTest(testName);
-        //     var empLeave = new EmpApplyLeave();
-        //     try
-        //     {
-        //         await empLeave.VerifyEmpApplyLeave(browserName);
-        //         ExtentReportManager.LogPass($"{testName} passed");
-        //     }
-        //     catch (System.Exception ex)
-        
-        //         {
-        //         ExtentReportManager.LogFail($"{testName} failed: {ex.Message}");
-        //         throw;
-        //     }
-        // }
 
         // [Test, Order(3)]
         // [TestCaseSource(nameof(BrowserList))]
@@ -83,7 +86,9 @@ namespace PlaywrightNUnitFramework
         //     }
         //     catch (System.Exception ex)
         //     {
+        //         var screenshotPath = await ScreenshotHelper.CaptureScreenshot(admin.TestPage!, testName);
         //         ExtentReportManager.LogFail($"{testName} failed: {ex.Message}");
+        //         ExtentReportManager.AttachScreenshot(screenshotPath);
         //         throw;
         //     }
         // }
@@ -102,7 +107,9 @@ namespace PlaywrightNUnitFramework
         //     }
         //     catch (System.Exception ex)
         //     {
+        //         var screenshotPath = await ScreenshotHelper.CaptureScreenshot(adminHoliday.TestPage!, testName);
         //         ExtentReportManager.LogFail($"{testName} failed: {ex.Message}");
+        //         ExtentReportManager.AttachScreenshot(screenshotPath);
         //         throw;
         //     }
         // }
@@ -121,7 +128,9 @@ namespace PlaywrightNUnitFramework
         //     }
         //     catch (System.Exception ex)
         //     {
+        //         var screenshotPath = await ScreenshotHelper.CaptureScreenshot(adminApprove.TestPage!, testName);
         //         ExtentReportManager.LogFail($"{testName} failed: {ex.Message}");
+        //         ExtentReportManager.AttachScreenshot(screenshotPath);
         //         throw;
         //     }
         // }
@@ -140,7 +149,9 @@ namespace PlaywrightNUnitFramework
         //     }
         //     catch (System.Exception ex)
         //     {
+        //         var screenshotPath = await ScreenshotHelper.CaptureScreenshot(empExtraWorking.TestPage!, testName);
         //         ExtentReportManager.LogFail($"{testName} failed: {ex.Message}");
+        //         ExtentReportManager.AttachScreenshot(screenshotPath);
         //         throw;
         //     }
         // }
@@ -159,9 +170,11 @@ namespace PlaywrightNUnitFramework
         //     }
         //     catch (System.Exception ex)
         //     {
+        //         var screenshotPath = await ScreenshotHelper.CaptureScreenshot(adminApproveExtra.TestPage!, testName);
         //         ExtentReportManager.LogFail($"{testName} failed: {ex.Message}");
+        //         ExtentReportManager.AttachScreenshot(screenshotPath);
         //         throw;
         //     }
-       //}
+        // }
     }
 }

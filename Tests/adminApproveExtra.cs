@@ -1,3 +1,4 @@
+using Microsoft.Playwright;
 using PlaywrightNUnitFramework.Pages;
 using PlaywrightNUnitFramework.Utils;
 
@@ -8,7 +9,7 @@ namespace PlaywrightNUnitFramework.Tests
     public class adminApproveExtra : BaseTest
     {
 
-
+        public IPage? TestPage => Page;
         public async Task AdminVerifyApproveExtra(string browserName)
         {
             await InitializePlaywright(browserName);
@@ -18,7 +19,7 @@ namespace PlaywrightNUnitFramework.Tests
             await adminPage.Navigate();
             await adminPage.Login();
             await adminPage.GetTitle();
-            await Utils.ApproveExtraWorking("EMPD321");
+            await Utils.ApproveExtraWorking("EMPNEW123");
         }
     }
 }

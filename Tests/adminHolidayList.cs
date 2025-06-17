@@ -1,3 +1,4 @@
+using Microsoft.Playwright;
 using PlaywrightNUnitFramework.Pages;
 using PlaywrightNUnitFramework.Utils;
 
@@ -5,11 +6,11 @@ using PlaywrightNUnitFramework.Utils;
 
 namespace PlaywrightNUnitFramework.Tests
 {
-    
+
     public class AdminHolidayList : BaseTest
     {
-        
-        
+
+        public IPage? TestPage => Page;
         public async Task VerifyAdminHolidayList(string browserName)
         {
             await InitializePlaywright(browserName);

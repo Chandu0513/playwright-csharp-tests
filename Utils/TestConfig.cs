@@ -29,7 +29,7 @@ namespace PlaywrightNUnitFramework.Utils
             var employeeEmailEnv = Environment.GetEnvironmentVariable("EMP_EMAIL");
             var employeePasswordEnv = Environment.GetEnvironmentVariable("EMP_PASSWORD");
 
-            // Validation
+            
             if (string.IsNullOrWhiteSpace(browserEnv)) throw new Exception("Missing BROWSERS in .env file.");
             if (string.IsNullOrWhiteSpace(baseUrlEnv)) throw new Exception("Missing BASE_URL in .env file.");
             if (string.IsNullOrWhiteSpace(timeoutEnv)) throw new Exception("Missing DEFAULT_TIMEOUT in .env file.");
@@ -38,7 +38,7 @@ namespace PlaywrightNUnitFramework.Utils
             if (string.IsNullOrWhiteSpace(employeeEmailEnv)) throw new Exception("Missing EMP_EMAIL in .env file.");
             if (string.IsNullOrWhiteSpace(employeePasswordEnv)) throw new Exception("Missing EMP_PASSWORD in .env file.");
 
-            // Assignments
+            
             Browsers = browserEnv.Split(',').Select(b => b.Trim()).ToList();
             BaseUrl = baseUrlEnv;
 

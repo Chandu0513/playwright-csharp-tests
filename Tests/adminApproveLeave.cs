@@ -1,3 +1,4 @@
+using Microsoft.Playwright;
 using PlaywrightNUnitFramework.Pages;
 using PlaywrightNUnitFramework.Utils;
 
@@ -8,7 +9,7 @@ namespace PlaywrightNUnitFramework.Tests
     public class adminApproveLeave : BaseTest
     {
     
-        
+        public IPage? TestPage => Page;
         public async Task AdminVerifyApproveLeave(string browserName)
         {
             await InitializePlaywright(browserName);
@@ -17,7 +18,7 @@ namespace PlaywrightNUnitFramework.Tests
             await adminPage.Navigate();      
             await adminPage.Login();
             await adminPage.GetTitle();
-            await Utils.ApproveLeave("EMPD321");
+            await Utils.ApproveLeave("EMPNEW123");
         }
     }
 }

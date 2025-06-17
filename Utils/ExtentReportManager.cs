@@ -15,7 +15,7 @@ namespace PlaywrightNUnitFramework.Utils
 
         public static void InitReport()
         {
-            // Generate report directory relative to current base directory
+
             var baseDir = AppContext.BaseDirectory;
             ReportRootPath = Path.Combine(baseDir, "TestReports");
 
@@ -47,5 +47,16 @@ namespace PlaywrightNUnitFramework.Utils
         }
 
         public static void Flush() => _extent?.Flush();
+
+        public static void AttachScreenshot(string screenshotPath)
+        {
+            if (File.Exists(screenshotPath) && _currentTest != null)
+            {
+                _currentTest.AddScreenCaptureFromPath(screenshotPath);
+            }
+        }
+
     }
+
 }
+
