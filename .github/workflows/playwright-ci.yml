@@ -1,4 +1,4 @@
-name: .NET Playwright Headed CI
+name: .NET Playwright CI
 
 on: 
   workflow_dispatch:
@@ -15,25 +15,33 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: '8.0.x' # Adjust based on your project
-
     - name: Restore dependencies
       run: dotnet restore
       shell: cmd
 
     - name: Build project
-      run: dotnet build --configuration Release
+      run: dotnet build --no-restore --configuration Release
       shell: cmd
 
-    - name: Install Playwright Browsers
-      run: pwsh bin\Debug\net8.0\playwright.ps1 install
-      shell: pwsh
-
-    - name: Run Playwright Tests (Headed)
-      run: dotnet test --configuration Release
+   
+    - name: Install Playwright Browsers (automated)
+      run: powershell -ExecutionPolicy Bypass -File bin\Release\net8.0\playwright.ps1 install
       shell: cmd
-      env:
-        PLAYWRIGHT_HEADLESS: false
+
+
+    - name: Add .NET tools folder to PATH
+      run: echo %USERPROFILE%\.dotnet\tools >> %GITHUB_PATH%
+      shell: cmd
+
+    - name: Install Playwright Browsers (automated)
+      run: powershell -ExecutionPolicy Bypass -File bin\Release\net8.0\playwright.ps1 install
+      shell: cmd
+
+    - name: Run tests
+      run: dotnet test --no-build --configuration Release --logger "trx"
+      shell: cmd
+
+    - name: Deploy to local folder
+      if: success()
+      run: powershell -ExecutionPolicy Bypass -File deploy.ps1
+      shell: cmd
