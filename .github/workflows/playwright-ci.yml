@@ -16,11 +16,11 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Set environment variables
-      shell: powershell
+      shell: cmd
       run: |
-        Add-Content -Path $env:GITHUB_ENV -Value "HEADLESS=false"
-        Add-Content -Path $env:GITHUB_ENV -Value "PLAYWRIGHT_BROWSERS_PATH=0"
-        Add-Content -Path $env:GITHUB_ENV -Value "DOTNET_ROOT=$env:USERPROFILE\.dotnet"
+        echo HEADLESS=false>> %GITHUB_ENV%
+        echo PLAYWRIGHT_BROWSERS_PATH=0>> %GITHUB_ENV%
+        echo DOTNET_ROOT=%USERPROFILE%\.dotnet>> %GITHUB_ENV%
 
     - name: Restore dependencies
       run: dotnet restore
@@ -35,7 +35,7 @@ jobs:
       shell: cmd
 
     - name: Add .NET tools folder to PATH
-      run: echo %USERPROFILE%\.dotnet\tools >> %GITHUB_PATH%
+      run: echo %USERPROFILE%\.dotnet\tools>> %GITHUB_PATH%
       shell: cmd
 
     - name: Install Playwright Browsers (automated)
