@@ -39,7 +39,7 @@ jobs:
       run: dotnet test --no-build --configuration Release --logger "trx"
       shell: cmd
 
-    - name: Deploy to local folder
-      if: success()
+    - name: Deploy or Copy Report to Folder (Always runs)
+      if: always()
       run: powershell -ExecutionPolicy Bypass -File deploy.ps1
       shell: cmd
