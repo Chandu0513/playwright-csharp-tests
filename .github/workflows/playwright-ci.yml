@@ -12,11 +12,16 @@ jobs:
     runs-on: [self-hosted]
 
     steps:
-
-    - name: Mark repo as safe directory
+    - name: Clean working directory to avoid Git ownership issues
       run: |
-        git config --global --add safe.directory "C:/actions-runner/_work/playwright-csharp-tests/playwright-csharp-tests"
-      shell: cmd  
+        if exist "C:\actions-runner\_work\playwright-csharp-tests\playwright-csharp-tests" (
+          rd /s /q "C:\actions-runner\_work\playwright-csharp-tests\playwright-csharp-tests"
+        )
+      shell: cmd
+
+    - name: Pre-authorize Git directory as safe
+      run: git config --global --add safe.directory "C:/actions-runner/_work/playwright-csharp-tests/playwright-csharp-tests"
+      shell: cmd 
 
     - name: Checkout code
       uses: actions/checkout@v3
