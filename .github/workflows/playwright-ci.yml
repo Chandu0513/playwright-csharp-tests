@@ -24,11 +24,6 @@ jobs:
       shell: cmd
 
    
-    # - name: Install Playwright Browsers (automated)
-    #   run: powershell -ExecutionPolicy Bypass -File bin\Release\net8.0\playwright.ps1 install
-    #   shell: cmd
-
-
     - name: Add .NET tools folder to PATH
       run: echo %USERPROFILE%\.dotnet\tools >> %GITHUB_PATH%
       shell: cmd
