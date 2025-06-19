@@ -61,7 +61,7 @@ namespace PlaywrightNUnitFramework.Utils
             Page = await Context.NewPageAsync();
             Page.SetDefaultTimeout(Config.Timeout);
 
-            // ✅ Start Trace Recording
+            
             await Context.Tracing.StartAsync(new TracingStartOptions
             {
                 Screenshots = true,
@@ -69,7 +69,7 @@ namespace PlaywrightNUnitFramework.Utils
                 Sources = true
             });
 
-            // Maximize window (Chromium only)
+            
             if (browserName.ToLower() == "chromium" && !isHeadless)
             {
                 var session = await Context.NewCDPSessionAsync(Page);
