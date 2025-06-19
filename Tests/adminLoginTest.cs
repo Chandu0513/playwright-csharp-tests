@@ -17,6 +17,7 @@ namespace PlaywrightNUnitFramework.Tests
             await adminPage.Navigate();
             await adminPage.Login();
             await adminPage.GetTitle();
+            await utilsMethod.StopAndSaveTrace(Context!, browserName: browserName);
 
         }
     }

@@ -349,7 +349,6 @@ C:\Users\Admin\PlaywrightNUnitFramework\bin\Debug\net8.0\nunit.engine.dll
 C:\Users\Admin\PlaywrightNUnitFramework\bin\Debug\net8.0\nunit.engine.api.dll
 C:\Users\Admin\PlaywrightNUnitFramework\bin\Debug\net8.0\nunit.engine.core.dll
 C:\Users\Admin\PlaywrightNUnitFramework\bin\Debug\net8.0\testcentric.engine.metadata.dll
-C:\Users\Admin\PlaywrightNUnitFramework\bin\Debug\net8.0\.env
 C:\Users\Admin\PlaywrightNUnitFramework\bin\Debug\net8.0\PlaywrightNUnitFramework.deps.json
 C:\Users\Admin\PlaywrightNUnitFramework\bin\Debug\net8.0\PlaywrightNUnitFramework.runtimeconfig.json
 C:\Users\Admin\PlaywrightNUnitFramework\bin\Debug\net8.0\PlaywrightNUnitFramework.dll
@@ -495,3 +494,4 @@ C:\Users\Admin\PlaywrightNUnitFramework\bin\Debug\net8.0\runtimes\win\lib\netcor
 C:\Users\Admin\PlaywrightNUnitFramework\bin\Debug\net8.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
 C:\Users\Admin\PlaywrightNUnitFramework\bin\Debug\net8.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
 C:\Users\Admin\PlaywrightNUnitFramework\bin\Debug\net8.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+C:\Users\Admin\PlaywrightNUnitFramework\bin\Debug\net8.0\.env

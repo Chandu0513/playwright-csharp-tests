@@ -43,7 +43,6 @@ namespace PlaywrightNUnitFramework.Pages
         {
             await _page.ClickAsync(allLocators.LeaveManagement);
             await _page.ClickAsync(allLocators.RequestsButton);
-
             var leaveRows = await _page.QuerySelectorAllAsync(allLocators.LeftPinnedRows);
             if (leaveRows == null || leaveRows.Count == 0)
             {
@@ -56,12 +55,10 @@ namespace PlaywrightNUnitFramework.Pages
                 var empCellElement = await row.QuerySelectorAsync(allLocators.EmployeeIdCell);
                 if (empCellElement == null)
                     continue;
-
                 var empCell = await empCellElement.InnerTextAsync();
                 if (empCell.Trim() == employeeId)
                 {
                     var rowIndex = await row.GetAttributeAsync("row-index");
-
                     await _page.EvaluateAsync($@"() => {{
                 const viewport = document.querySelector('{allLocators.CenterColsViewport}');
                 if (viewport) {{
@@ -70,11 +67,9 @@ namespace PlaywrightNUnitFramework.Pages
             }}");
 
                     await _page.WaitForTimeoutAsync(300);
-
                     var approveButton = _page.Locator(allLocators.ApproveButton(rowIndex!));
                     await approveButton.ScrollIntoViewIfNeededAsync();
                     await approveButton.ClickAsync();
-
                     Console.WriteLine($"✅ Approved leave for employee ID: {employeeId}");
                     return;
                 }

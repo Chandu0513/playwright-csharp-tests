@@ -5,8 +5,8 @@ using PlaywrightNUnitFramework.Utils;
 
 namespace PlaywrightNUnitFramework.Tests
 {
-   
-   
+
+
     public class empExtraWorking : BaseTest
     {
         public IPage? TestPage => Page;
@@ -20,7 +20,8 @@ namespace PlaywrightNUnitFramework.Tests
             await emplogin.Reimbursement();
             await emplogin.FillDate();
             await emplogin.FillDetails();
-           
+            await utilsMethod.StopAndSaveTrace(Context!, browserName: browserName);
+
 
 
         }

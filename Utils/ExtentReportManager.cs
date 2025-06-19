@@ -56,6 +56,24 @@ namespace PlaywrightNUnitFramework.Utils
             }
         }
 
+        public static void AttachVideo(string videoPath)
+        {
+            if (File.Exists(videoPath) && _currentTest != null)
+            {
+                string relativePath = Path.GetRelativePath(ReportRootPath, videoPath).Replace("\\", "/");
+
+                string videoHtml = $@"
+            <video width='640' height='360' controls>
+                <source src='{relativePath}' type='video/webm'>
+                Your browser does not support the video tag.
+            </video>";
+
+                _currentTest.Info("Test Video:<br>" + videoHtml);
+            }
+        }
+
+
+
     }
 
 }

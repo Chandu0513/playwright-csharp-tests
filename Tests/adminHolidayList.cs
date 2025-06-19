@@ -20,6 +20,7 @@ namespace PlaywrightNUnitFramework.Tests
             await adminPage.Login();
             await adminPage.GetTitle();
             await holiday.FetchHolidayList();
+            await utilsMethod.StopAndSaveTrace(Context!, browserName: browserName);
 
         }
     }

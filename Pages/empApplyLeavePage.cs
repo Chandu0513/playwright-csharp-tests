@@ -47,7 +47,7 @@ namespace PlaywrightNUnitFramework.Pages
 
         public async Task Leavedatepickup()
         {
-            
+
             DateTime startRange = new DateTime(2025, 6, 18);
             DateTime latestStart = new DateTime(2025, 7, 10);
             int range = (latestStart - startRange).Days;

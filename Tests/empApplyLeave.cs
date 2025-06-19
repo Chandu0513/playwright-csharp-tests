@@ -26,6 +26,7 @@ namespace PlaywrightNUnitFramework.Tests
             await emplogin.FillLeaveDetails();
             await emplogin.CheckboxSubmit();
             await emplogin.SubmitLeave();
+            await utilsMethod.StopAndSaveTrace(Context!, browserName: browserName);
 
 
         }

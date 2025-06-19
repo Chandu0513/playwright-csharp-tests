@@ -3,6 +3,7 @@ using Microsoft.Playwright;
 using NUnit.Framework;
 using System.Text.RegularExpressions;
 using System.IO;
+using PlaywrightNUnitFramework.Utils;
 
 namespace PlaywrightNUnitFramework.Utils
 {
@@ -41,10 +42,16 @@ namespace PlaywrightNUnitFramework.Utils
                 _ => throw new ArgumentException($"Unsupported browser: {browserName}")
             };
 
+            string safeTestName = Regex.Replace(TestContext.CurrentContext.Test.Name, "[^a-zA-Z0-9-_\\.]", "_");
+            var videoPath = Path.Combine(AppContext.BaseDirectory, "videos", safeTestName);
+            Directory.CreateDirectory(videoPath);
+
             var contextOptions = new BrowserNewContextOptions
             {
                 BaseURL = Config.BaseUrl,
-                ViewportSize = null
+                ViewportSize = null,
+                RecordVideoDir = videoPath,
+                RecordVideoSize = new RecordVideoSize { Width = 1280, Height = 720 }
             };
 
             if (!string.IsNullOrEmpty(authStoragePath) && File.Exists(authStoragePath))
@@ -54,7 +61,15 @@ namespace PlaywrightNUnitFramework.Utils
             Page = await Context.NewPageAsync();
             Page.SetDefaultTimeout(Config.Timeout);
 
-            
+            // ✅ Start Trace Recording
+            await Context.Tracing.StartAsync(new TracingStartOptions
+            {
+                Screenshots = true,
+                Snapshots = true,
+                Sources = true
+            });
+
+            // Maximize window (Chromium only)
             if (browserName.ToLower() == "chromium" && !isHeadless)
             {
                 var session = await Context.NewCDPSessionAsync(Page);
@@ -77,22 +92,18 @@ namespace PlaywrightNUnitFramework.Utils
             var testContext = TestContext.CurrentContext;
 
             if (testContext.Result.FailCount > 0)
-            {
                 ExtentReportManager.LogFail(testContext.Result.Message ?? "Test Failed");
-            }
             else
-            {
                 ExtentReportManager.LogPass("Test Passed");
-            }
 
             if (Context != null) await Context.CloseAsync();
             if (Browser != null) await Browser.CloseAsync();
             Playwright?.Dispose();
         }
 
-        private string SanitizeFileName(string name)
-        {
-            return Regex.Replace(name, "[^a-zA-Z0-9-_\\.]", "_");
-        }
+
+
+
+
     }
 }

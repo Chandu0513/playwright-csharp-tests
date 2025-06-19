@@ -47,32 +47,37 @@ namespace PlaywrightNUnitFramework.Pages
         {
 
             await _page.FillAsync(allLocators.HoursInputLocator, "8");
-
-
             await _page.SelectOptionAsync(allLocators.LeadSelectLocator, new SelectOptionValue { Label = _config.AdminEmail });
-
-
             await _page.ClickAsync(allLocators.ExtraworkSubmitButtonLocator);
-
-
             string logMessage = "Extra work details filled and submitted.";
             Console.WriteLine(logMessage);
             ExtentReportManager.LogInfo(logMessage);
         }
+
+
 
         private static Random random = new Random();
 
         public async Task FillDate()
         {
             var now = DateTime.Now;
-            var daysInMonth = DateTime.DaysInMonth(now.Year, now.Month);
-            int randomDay = random.Next(1, daysInMonth + 1);
+            int maxDay = now.Day - 1; 
+
+            if (maxDay < 1)
+            {
+                
+                Console.WriteLine("No valid date earlier than today.");
+                return;
+            }
+
+            int randomDay = random.Next(1, maxDay + 1); 
             string randomDate = new DateTime(now.Year, now.Month, randomDay).ToString("yyyy-MM-dd");
             await _page.FillAsync(allLocators.ExtraworkDateInputLocator, randomDate);
             string logMessage = $"Extra working day applied for date: {randomDate}";
             Console.WriteLine(logMessage);
             ExtentReportManager.LogInfo(logMessage);
         }
+
 
 
 

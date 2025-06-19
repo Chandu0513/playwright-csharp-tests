@@ -20,12 +20,9 @@ namespace PlaywrightNUnitFramework.Pages
 
         public async Task FetchHolidayList()
         {
-
             await _page.WaitForSelectorAsync(_holidayCards);
-
             var holidayElements = _page.Locator(_holidayCards);
             int totalHolidays = await holidayElements.CountAsync();
-
             string totalHolidaysMessage = $"Total holidays: {totalHolidays}";
             Console.WriteLine(totalHolidaysMessage);
             ExtentReportManager.LogInfo(totalHolidaysMessage);
@@ -35,11 +32,8 @@ namespace PlaywrightNUnitFramework.Pages
             {
                 var nameLocator = holidayElements.Nth(i).Locator(_holidayName);
                 var dateLocator = holidayElements.Nth(i).Locator(_holidayDate);
-
-
                 string name = await nameLocator.InnerTextAsync();
                 string date = await dateLocator.InnerTextAsync();
-
                 string holidayMessage = $"Holiday {i + 1}: {name} on {date}";
                 Console.WriteLine(holidayMessage);
                 ExtentReportManager.LogInfo(holidayMessage);
