@@ -46,7 +46,7 @@ namespace PlaywrightNUnitFramework.StorageState
             await AfterEachTest();
         }
 
-        //storagestate
+        //storagestates
 
        [Test, Order(2),  Ignore("Excluded from this run")]
         [TestCaseSource(nameof(BrowserList))]
