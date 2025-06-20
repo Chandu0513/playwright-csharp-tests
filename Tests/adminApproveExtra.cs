@@ -18,12 +18,9 @@ namespace PlaywrightNUnitFramework.Tests
             await adminPage.Navigate();
             await adminPage.Login();
             await adminPage.GetTitle();
-            await Utils.ApproveExtraWorking("EMPNEW123");
+            await Utils.ApproveExtraWorking("TWLD04");
             await utilsMethod.StopAndSaveTrace(Context!, browserName: browserName);
-            // string tracePath = Path.Combine(AppContext.BaseDirectory, "my-trace.zip");
-            // await Context!.Tracing.StopAsync(new TracingStopOptions { Path = tracePath });
-
-            // Console.WriteLine($"Trace saved to: {tracePath}");
+         
         }
     }
 }

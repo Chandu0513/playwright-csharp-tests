@@ -18,7 +18,7 @@ namespace PlaywrightNUnitFramework.Tests
             await adminPage.Navigate();
             await adminPage.Login();
             await adminPage.GetTitle();
-            await Utils.ApproveLeave("EMPNEW123");
+            await Utils.ApproveLeave("TWLD04");
             await utilsMethod.StopAndSaveTrace(Context!, browserName: browserName);
         }
     }
