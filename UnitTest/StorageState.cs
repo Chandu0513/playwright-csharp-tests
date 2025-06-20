@@ -21,7 +21,7 @@ namespace PlaywrightNUnitFramework.StorageState
             return config.Browsers;
         }
 
-       [Test, Order(1), Ignore("Excluded from this run")]
+        [Test, Order(1), Ignore("Excluded from this run")]
         [TestCaseSource(nameof(BrowserList))]
         public async Task LoginAndSaveStorageState(string browserName)
         {
@@ -48,7 +48,7 @@ namespace PlaywrightNUnitFramework.StorageState
 
         //storagestate
 
-       [Test, Order(2), Ignore("Excluded from this run")]
+       [Test, Order(2),  Ignore("Excluded from this run")]
         [TestCaseSource(nameof(BrowserList))]
         public async Task OpenEmployeePageUsingStoredLogin(string browserName)
         {
