@@ -2,10 +2,12 @@
 
 $BuildOutput = "C:\actions-runner\_work\playwright-csharp-tests\playwright-csharp-tests\bin\Release\net8.0"
 $DeployPath = "C:\AfterCIRunner\MyProject"
-$TraceZipPath = Join-Path $DeployPath "trace.zip"
+$TraceZipPath = "C:\AfterCIRunner\MyProject\TestTrace\trace.zip"
+$PlaywrightCLI = "$env:USERPROFILE\.dotnet\tools\playwright.cmd"
 
 Write-Host "Starting Deployment..."
 
+# Clean previous deployment
 if (Test-Path $DeployPath) {
     Write-Host "Clearing existing deployment folder..."
     Remove-Item -Path "$DeployPath\*" -Recurse -Force
@@ -14,15 +16,16 @@ if (Test-Path $DeployPath) {
     New-Item -Path $DeployPath -ItemType Directory -Force
 }
 
+# Copy new files
 Write-Host "Copying new build output..."
 Copy-Item "$BuildOutput\*" "$DeployPath" -Recurse -Force
 
-Write-Host "Deployment completed. Launching trace if available..."
+Write-Host "Deployment completed."
 
-# Optional: Automatically open trace.zip using Playwright CLI viewer
+# Open the trace.zip file in Playwright Trace Viewer
 if (Test-Path $TraceZipPath) {
-    $PlaywrightCLI = "C:\Users\runner_user\.dotnet\tools\playwright.cmd"  # Adjust path if needed
-    Start-Process $PlaywrightCLI "trace viewer `"$TraceZipPath`""
+    Write-Host "Launching Playwright Trace Viewer..."
+    Start-Process -FilePath $PlaywrightCLI -ArgumentList "trace", "viewer", "`"$TraceZipPath`""
 } else {
-    Write-Host "Trace file not found: $TraceZipPath"
+    Write-Host "Trace file not found at: $TraceZipPath"
 }
