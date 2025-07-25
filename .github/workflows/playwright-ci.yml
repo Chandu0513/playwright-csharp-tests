@@ -29,8 +29,9 @@ jobs:
       run: echo %USERPROFILE%\.dotnet\tools >> %GITHUB_PATH%
       shell: cmd
 
-    - name: Install Playwright Browsers (automated)
-      run: powershell -ExecutionPolicy Bypass -File bin\Release\net8.0\playwright.ps1 install
+    - name: Install Playwright Browsers
+      run: |
+        powershell -NoProfile -ExecutionPolicy Bypass -Command "bin\Release\net8.0\playwright.ps1 install --with-deps"
       shell: cmd
 
     - name: Run tests
