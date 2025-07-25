@@ -1,7 +1,7 @@
 # deploy.ps1
 
 $BuildOutput = "C:\actions-runner\_work\playwright-csharp-tests\playwright-csharp-tests\bin\Release\net8.0"
-$DeployPath = "C:\DeployedApps\MyDotNetApp"
+$DeployPath = "C:\AfterCIRunner\MyProject"
 
 Write-Host "Starting Deployment..."
 
