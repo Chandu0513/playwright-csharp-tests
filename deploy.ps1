@@ -2,12 +2,10 @@
 
 $BuildOutput = "C:\actions-runner\_work\playwright-csharp-tests\playwright-csharp-tests\bin\Release\net8.0"
 $DeployPath = "C:\AfterCIRunner\MyProject"
-$TraceZipPath = "C:\actions-runner_work\playwright-csharp-tests\playwright-csharp-tests\bin\Debug\net8.0\TestTraces\trace.zip"
-$PlaywrightCLI = "$env:USERPROFILE\.dotnet\tools\playwright.cmd"
 
 Write-Host "Starting Deployment..."
 
-# Clean previous deployment
+# Clean the target folder if it exists
 if (Test-Path $DeployPath) {
     Write-Host "Clearing existing deployment folder..."
     Remove-Item -Path "$DeployPath\*" -Recurse -Force
@@ -16,16 +14,7 @@ if (Test-Path $DeployPath) {
     New-Item -Path $DeployPath -ItemType Directory -Force
 }
 
-# Copy new files
 Write-Host "Copying new build output..."
 Copy-Item "$BuildOutput\*" "$DeployPath" -Recurse -Force
 
-Write-Host "Deployment completed."
-
-# Open the trace.zip file in Playwright Trace Viewer
-if (Test-Path $TraceZipPath) {
-    Write-Host "Launching Playwright Trace Viewer..."
-    Start-Process -FilePath $PlaywrightCLI -ArgumentList "trace", "viewer", "`"$TraceZipPath`""
-} else {
-    Write-Host "Trace file not found at: $TraceZipPath"
-}
+Write-Host "Hey explorer from optimworks. The deployment completed successfully. Check the latest report in the deployment path."
