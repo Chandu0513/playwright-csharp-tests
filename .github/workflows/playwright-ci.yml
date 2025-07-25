@@ -37,6 +37,8 @@ jobs:
       continue-on-error: true  # Allows workflow to proceed even if tests fai
       run: dotnet test --no-build --configuration Release --logger "trx"
       shell: cmd
+      env: 
+        Headless: false
 
     - name: Deploy to local folder
       if: success()  # Only runs if all previous steps (except test) succeeded
