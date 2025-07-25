@@ -1,28 +1,40 @@
 $BuildOutput = "C:\actions-runner\_work\playwright-csharp-tests\playwright-csharp-tests\bin\Release\net8.0"
 $DeployPath = "C:\AfterCIRunner\MyProject"
 
-Write-Host "Starting Deployment..."
+Write-Host "`n📦 Starting Deployment..."
 
-# Ensure deployment path exists
+# Ensure deployment folder is clean
 if (Test-Path $DeployPath) {
-    Write-Host "Clearing existing deployment folder..."
-    Remove-Item -Path "$DeployPath\*" -Recurse -Force
+    Write-Host "🧹 Cleaning existing deployment folder..."
+    Remove-Item -Path "$DeployPath\*" -Recurse -Force -ErrorAction SilentlyContinue
 } else {
-    Write-Host "Creating deployment folder..."
-    New-Item -Path $DeployPath -ItemType Directory -Force
+    Write-Host "📁 Creating deployment folder..."
+    New-Item -Path $DeployPath -ItemType Directory -Force | Out-Null
 }
 
-Write-Host "Copying all files from build output to deployment folder..."
-Get-ChildItem -Path $BuildOutput -Recurse | ForEach-Object {
-    $dest = Join-Path $DeployPath ($_.FullName.Substring($BuildOutput.Length))
-    $destDir = Split-Path $dest
-    if (-not (Test-Path $destDir)) {
-        New-Item -Path $destDir -ItemType Directory -Force | Out-Null
+# Recreate folder structure and copy files manually
+Write-Host "📁 Copying files..."
+$items = Get-ChildItem -Path $BuildOutput -Recurse -Force
+
+foreach ($item in $items) {
+    $relativePath = $item.FullName.Substring($BuildOutput.Length).TrimStart('\')
+    $targetPath = Join-Path $DeployPath $relativePath
+
+    if ($item.PSIsContainer) {
+        if (!(Test-Path $targetPath)) {
+            New-Item -Path $targetPath -ItemType Directory -Force | Out-Null
+        }
+    } else {
+        $targetDir = Split-Path $targetPath -Parent
+        if (!(Test-Path $targetDir)) {
+            New-Item -Path $targetDir -ItemType Directory -Force | Out-Null
+        }
+        Copy-Item -Path $item.FullName -Destination $targetPath -Force
     }
-    Copy-Item -Path $_.FullName -Destination $dest -Force
 }
 
-Write-Host "Removing original files from build output..."
-Remove-Item -Path "$BuildOutput\*" -Recurse -Force
+# Delete original files/folders
+Write-Host "🗑️ Cleaning up original build output..."
+Get-ChildItem -Path $BuildOutput -Recurse -Force | Remove-Item -Force -Recurse -ErrorAction SilentlyContinue
 
-Write-Host "✅ Deployment complete. All files copied and original build output cleaned."
+Write-Host "`n✅ Deployment completed. All files copied and source cleaned."
