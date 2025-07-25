@@ -74,8 +74,8 @@ jobs:
       - name: Install Playwright Browsers
         run: pwsh bin/Release/net8.0/playwright.ps1 install
 
-      - name: Run tests
-        run: dotnet test --no-build --configuration Release --logger "trx"
+      - name: Run tests with xvfb
+        run: xvfb-run --auto-servernum dotnet test --no-build --configuration Release --logger "trx"
         env:
           HEADLESS: true
 
