@@ -13,7 +13,7 @@ jobs:
   run-on-selfhost:
     name: Run on Self-Hosted Runner
     runs-on: [self-hosted]
-    continue-on-error: true  # Don't block workflow if fails
+    continue-on-error: true
 
     steps:
       - name: Checkout code
@@ -49,7 +49,7 @@ jobs:
   run-on-ubuntu:
     name: Run on Ubuntu VM
     runs-on: ubuntu-latest
-    continue-on-error: true  # Independent
+    continue-on-error: true
 
     steps:
       - name: Checkout code
@@ -60,6 +60,11 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
       - name: Restore dependencies
         run: dotnet restore
 
@@ -67,7 +72,7 @@ jobs:
         run: dotnet build --no-restore --configuration Release
 
       - name: Install Playwright Browsers
-        run: pwsh bin/Release/net8.0/playwright.ps1 install
+        run: npx playwright install
 
       - name: Run tests
         run: dotnet test --no-build --configuration Release --logger "trx"
@@ -78,7 +83,7 @@ jobs:
         run: zip -r test_output.zip .
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ubuntu-test-output
           path: test_output.zip
