@@ -7,40 +7,69 @@ on:
   pull_request:
     branches: [ main, master ]
   schedule:
-    - cron: '*/2 * * * *'  
+    - cron: '*/2 * * * *'  # every 2 minutes
 
 jobs:
-  build-and-test:
+  build-self-hosted:
+    name: Build & Test on Self-Hosted Windows
     runs-on: [self-hosted]
+    continue-on-error: true
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Restore dependencies
-      run: dotnet restore
-      shell: cmd
+      - name: Restore dependencies
+        run: dotnet restore
+        shell: cmd
 
-    - name: Build project
-      run: dotnet build --no-restore --configuration Release
-      shell: cmd
+      - name: Build project
+        run: dotnet build --no-restore --configuration Release
+        shell: cmd
 
-    - name: Add .NET tools folder to PATH
-      run: echo %USERPROFILE%\.dotnet\tools >> %GITHUB_PATH%
-      shell: cmd
+      - name: Add .NET tools folder to PATH
+        run: echo %USERPROFILE%\.dotnet\tools >> %GITHUB_PATH%
+        shell: cmd
 
-    - name: Install Playwright Browsers (automated)
-      run: powershell -ExecutionPolicy Bypass -File bin\Release\net8.0\playwright.ps1 install
-      shell: cmd
+      - name: Install Playwright Browsers
+        run: powershell -ExecutionPolicy Bypass -File bin\Release\net8.0\playwright.ps1 install
+        shell: cmd
 
-    - name: Run tests
-      continue-on-error: true  
-      run: dotnet test --no-build --configuration Release --logger "trx"
-      shell: cmd
-      env: 
-        HEADLESS: false
+      - name: Run tests
+        run: dotnet test --no-build --configuration Release --logger "trx"
+        shell: cmd
+        env: 
+          HEADLESS: false
 
-    - name: Deploy to local folder
-      if: success()  # Only runs if all previous steps (except test) succeededd
-      run: powershell -ExecutionPolicy Bypass -File deploy.ps1
-      shell: cmd
+      - name: Deploy to local folder
+        run: powershell -ExecutionPolicy Bypass -File deploy.ps1
+        shell: cmd
+
+  build-fallback-vm:
+    name: Fallback on Ubuntu VM (GitHub-hosted)
+    runs-on: ubuntu-latest
+    needs: build-self-hosted
+    if: failure()  # Only run if self-hosted runner fails
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build project
+        run: dotnet build --no-restore --configuration Release
+
+      - name: Install Playwright Browsers
+        run: pwsh bin/Release/net8.0/playwright.ps1 install
+
+      - name: Run tests
+        run: dotnet test --no-build --configuration Release --logger "trx"
+        env:
+          HEADLESS: true
