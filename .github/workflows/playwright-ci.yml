@@ -7,7 +7,7 @@ on:
   pull_request:
     branches: [ main, master ]
   schedule:
-    - cron: '0 10 * * *'   # Runs daily at 3:30 PM IST
+    - cron: '21 10 * * *'   # Runs daily at 3:30 PM IST
 
 jobs:
   build-and-test:
@@ -34,7 +34,7 @@ jobs:
       shell: cmd
 
     - name: Run tests
-      continue-on-error: true  # Allows workflow to proceed even if tests fai
+      continue-on-error: true  
       run: dotnet test --no-build --configuration Release --logger "trx"
       shell: cmd
       env: 
