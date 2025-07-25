@@ -41,6 +41,6 @@ jobs:
         HEADLESS: false
 
     - name: Deploy to local folder
-      if: success()  # Only runs if all previous steps (except test) succeeded
+      if: success()  # Only runs if all previous steps (except test) succeededd
       run: powershell -ExecutionPolicy Bypass -File deploy.ps1
       shell: cmd
