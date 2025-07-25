@@ -7,7 +7,7 @@ on:
   pull_request:
     branches: [ main, master ]
   schedule:
-    - cron: '0 4 * * *'  # Runs daily at 4 AM UTC
+    - cron: '0 10 * * *'   # Runs daily at 3:30 PM IST
 
 jobs:
   build-and-test:
