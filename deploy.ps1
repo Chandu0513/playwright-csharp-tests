@@ -2,7 +2,7 @@
 
 $BuildOutput = "C:\actions-runner\_work\playwright-csharp-tests\playwright-csharp-tests\bin\Release\net8.0"
 $DeployPath = "C:\AfterCIRunner\MyProject"
-$TraceZipPath = "C:\AfterCIRunner\MyProject\TestTrace\trace.zip"
+$TraceZipPath = "C:\actions-runner_work\playwright-csharp-tests\playwright-csharp-tests\bin\Debug\net8.0\TestTraces"
 $PlaywrightCLI = "$env:USERPROFILE\.dotnet\tools\playwright.cmd"
 
 Write-Host "Starting Deployment..."
