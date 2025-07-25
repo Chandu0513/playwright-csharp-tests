@@ -34,7 +34,7 @@ jobs:
       shell: cmd
 
     - name: Run tests
-      continue-on-error: true  # Allows workflow to proceed even if tests fail
+      continue-on-error: true  # Allows workflow to proceed even if tests fai
       run: dotnet test --no-build --configuration Release --logger "trx"
       shell: cmd
 
