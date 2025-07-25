@@ -29,10 +29,10 @@ jobs:
       run: echo %USERPROFILE%\.dotnet\tools >> %GITHUB_PATH%
       shell: cmd
 
-    - name: Install Playwright Browsers
-      run: |
-        powershell -NoProfile -ExecutionPolicy Bypass -Command "bin\Release\net8.0\playwright.ps1 install --with-deps"
+    - name: Install Playwright Browsers via .NET CLI
+      run: dotnet tool run playwright install
       shell: cmd
+
 
     - name: Run tests
       continue-on-error: true  # Allows workflow to proceed even if tests fai
