@@ -77,7 +77,7 @@ jobs:
       - name: Run tests
         run: dotnet test --no-build --configuration Release --logger "trx"
         env:
-          HEADLESS: false
+          HEADLESS: true
 
       - name: Zip test output
         run: zip -r test_output.zip .
