@@ -42,10 +42,16 @@ namespace PlaywrightNUnitFramework.Utils
                 _ => throw new ArgumentException($"Unsupported browser: {browserName}")
             };
 
+            // string safeTestName = Regex.Replace(TestContext.CurrentContext.Test.Name, "[^a-zA-Z0-9-_\\.]", "_");
+            // var videoPath = Path.Combine(AppContext.BaseDirectory, "videos", safeTestName);
+            // Directory.CreateDirectory(videoPath);
             string safeTestName = Regex.Replace(TestContext.CurrentContext.Test.Name, "[^a-zA-Z0-9-_\\.]", "_");
-            var videoPath = Path.Combine(AppContext.BaseDirectory, "videos", safeTestName);
-            Directory.CreateDirectory(videoPath);
+            string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+            string randomString = Path.GetRandomFileName().Replace(".", "").Substring(0, 6); // 6-char random string
 
+            string folderName = $"{safeTestName}_{timestamp}_{randomString}";
+            string videoPath = Path.Combine(AppContext.BaseDirectory, "videos", folderName);
+            Directory.CreateDirectory(videoPath);
             var contextOptions = new BrowserNewContextOptions
             {
                 BaseURL = Config.BaseUrl,
@@ -61,7 +67,7 @@ namespace PlaywrightNUnitFramework.Utils
             Page = await Context.NewPageAsync();
             Page.SetDefaultTimeout(Config.Timeout);
 
-            
+
             await Context.Tracing.StartAsync(new TracingStartOptions
             {
                 Screenshots = true,
@@ -69,7 +75,7 @@ namespace PlaywrightNUnitFramework.Utils
                 Sources = true
             });
 
-            
+
             if (browserName.ToLower() == "chromium" && !isHeadless)
             {
                 var session = await Context.NewCDPSessionAsync(Page);
