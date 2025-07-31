@@ -42,9 +42,7 @@ namespace PlaywrightNUnitFramework.Utils
                 _ => throw new ArgumentException($"Unsupported browser: {browserName}")
             };
 
-            // string safeTestName = Regex.Replace(TestContext.CurrentContext.Test.Name, "[^a-zA-Z0-9-_\\.]", "_");
-            // var videoPath = Path.Combine(AppContext.BaseDirectory, "videos", safeTestName);
-            // Directory.CreateDirectory(videoPath);
+           
             string safeTestName = Regex.Replace(TestContext.CurrentContext.Test.Name, "[^a-zA-Z0-9-_\\.]", "_");
             string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
             string randomString = Path.GetRandomFileName().Replace(".", "").Substring(0, 6); // 6-char random string
@@ -57,7 +55,8 @@ namespace PlaywrightNUnitFramework.Utils
                 BaseURL = Config.BaseUrl,
                 ViewportSize = null,
                 RecordVideoDir = videoPath,
-                RecordVideoSize = new RecordVideoSize { Width = 1280, Height = 720 }
+                RecordVideoSize = new RecordVideoSize { Width = 1280, Height = 720 },
+                Permissions = new[] { "notifications" }
             };
 
             if (!string.IsNullOrEmpty(authStoragePath) && File.Exists(authStoragePath))
