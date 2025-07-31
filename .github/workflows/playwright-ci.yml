@@ -7,6 +7,7 @@ on:
   pull_request:
     branches: [ main, master ]
 
+    
 jobs:
   run-on-selfhost:
     name: Run on Self-Hosted Runner
